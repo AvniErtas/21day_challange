@@ -3,6 +3,7 @@ import 'package:flutter_app_21/main.dart';
 import 'package:flutter_app_21/screens/design_course/category_list_view.dart';
 import 'package:flutter_app_21/screens/design_course/course_info_screen.dart';
 import 'package:flutter_app_21/screens/design_course/popular_course_list_view.dart';
+import '../profilepage.dart';
 import 'design_course_app_theme.dart';
 
 class DesignCourseHomeScreen extends StatefulWidget {
@@ -16,7 +17,10 @@ class DesignCourseHomeScreen extends StatefulWidget {
 }
 
 class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
-  CategoryType categoryType = CategoryType.ui;
+
+
+  CategoryType categoryType = CategoryType.first;
+
 
   @override
   Widget build(BuildContext context) {
@@ -90,17 +94,22 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
           padding: const EdgeInsets.only(left: 16, right: 16),
           child: Row(
             children: <Widget>[
-              getButtonUI(CategoryType.ui, categoryType == CategoryType.ui),
+              getButtonUI(CategoryType.first, categoryType == CategoryType.first),
               const SizedBox(
                 width: 16,
               ),
               getButtonUI(
-                  CategoryType.coding, categoryType == CategoryType.coding),
+                  CategoryType.second, categoryType == CategoryType.second),
               const SizedBox(
                 width: 16,
               ),
               getButtonUI(
-                  CategoryType.basic, categoryType == CategoryType.basic),
+                  CategoryType.third, categoryType == CategoryType.third),
+              const SizedBox(
+                width: 16,
+              ),
+              getButtonUI(
+                  CategoryType.last, categoryType == CategoryType.last),
             ],
           ),
         ),
@@ -124,7 +133,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'Popular Course',
+            'Kategori Adı',
             textAlign: TextAlign.left,
             style: TextStyle(
               fontWeight: FontWeight.w600,
@@ -155,13 +164,24 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
   }
 
   Widget getButtonUI(CategoryType categoryTypeData, bool isSelected) {
-    String txt = '';
-    if (CategoryType.ui == categoryTypeData) {
-      txt = 'Ui/Ux';
-    } else if (CategoryType.coding == categoryTypeData) {
-      txt = 'Coding';
-    } else if (CategoryType.basic == categoryTypeData) {
-      txt = 'Basic UI';
+
+    //SelectedCategory ifadesini dinlememiz gerekiyor böylece kategori listesi tıkladığında güncellensin.
+    int selectedCategory ;
+    String categoryName ="";
+
+
+    if (CategoryType.first == categoryTypeData) {
+      selectedCategory = 1;
+      categoryName ="Eğitim";
+    } else if (CategoryType.second == categoryTypeData) {
+      categoryName = 'Sağlık';
+      selectedCategory = 2;
+    } else if (CategoryType.third == categoryTypeData) {
+      categoryName = 'Spor';
+      selectedCategory = 3;
+    } else if (CategoryType.last == categoryTypeData) {
+      categoryName = 'Düzen';
+      selectedCategory = 4;
     }
     return Expanded(
       child: Container(
@@ -186,7 +206,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
                   top: 12, bottom: 12, left: 18, right: 18),
               child: Center(
                 child: Text(
-                  txt,
+                  categoryName,
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
@@ -283,6 +303,11 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
       child: Row(
         children: <Widget>[
           InkWell(
+            onTap: (){
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfilePage()));
+            },
             child: Container(
               width: 60,
               height: 60,
@@ -325,7 +350,8 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
 }
 
 enum CategoryType {
-  ui,
-  coding,
-  basic,
+  first,
+  second,
+  third,
+  last,
 }
