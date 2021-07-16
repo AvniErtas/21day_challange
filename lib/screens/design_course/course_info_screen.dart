@@ -56,12 +56,15 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
               children: <Widget>[
                 AspectRatio(
                   aspectRatio: 1.2,
-                  child: Image.asset('assets/design_course/webInterFace.png'),
+                  child: Hero(
+                      tag: 'course0',
+                      child:
+                          Image.asset('assets/design_course/interFace3.png')),
                 ),
               ],
             ),
             Positioned(
-              top: (MediaQuery.of(context).size.width / 1.2) - 24.0,
+              top: (MediaQuery.of(context).size.width / 1.5) - 24.0,
               bottom: 0,
               left: 0,
               right: 0,
@@ -95,7 +98,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                             padding: const EdgeInsets.only(
                                 top: 32.0, left: 18, right: 16),
                             child: Text(
-                              'Web Design\nCourse',
+                              'Gece Rutini',
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
@@ -105,7 +108,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                               ),
                             ),
                           ),
-                          Padding(
+                          /*  Padding(
                             padding: const EdgeInsets.only(
                                 left: 16, right: 16, bottom: 8, top: 16),
                             child: Row(
@@ -145,41 +148,70 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                 )
                               ],
                             ),
-                          ),
-                          AnimatedOpacity(
+                          ),*/
+                          /*AnimatedOpacity(
                             duration: const Duration(milliseconds: 500),
                             opacity: opacity1,
                             child: Padding(
                               padding: const EdgeInsets.all(8),
                               child: Row(
                                 children: <Widget>[
-                                  getTimeBoxUI('24', 'Classe'),
+                                  getTimeBoxUI('21', 'Gün'),
                                   getTimeBoxUI('2hours', 'Time'),
                                   getTimeBoxUI('24', 'Seat'),
                                 ],
                               ),
                             ),
+                          ),*/
+                          AnimatedOpacity(
+                            duration: const Duration(milliseconds: 500),
+                            opacity: opacity2,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 16, right: 16, top: 8, bottom: 8),
+                              child: Text(
+                                'Bu mücadelede, daha iyi bir gece uykusu çekmek ve yatma vaktinde daha az stresli hissetmek için bazı uyku hileleri ve ipuçları bulacaksınız.',
+                                textAlign: TextAlign.justify,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 14,
+                                  letterSpacing: 0.27,
+                                  color: DesignCourseAppTheme.grey,
+                                ),
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
                           ),
                           Expanded(
-                            child: AnimatedOpacity(
-                              duration: const Duration(milliseconds: 500),
-                              opacity: opacity2,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 16, right: 16, top: 8, bottom: 8),
-                                child: Text(
-                                  'Lorem ipsum is simply dummy text of printing & typesetting industry, Lorem ipsum is simply dummy text of printing & typesetting industry.',
-                                  textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w200,
-                                    fontSize: 14,
-                                    letterSpacing: 0.27,
-                                    color: DesignCourseAppTheme.grey,
-                                  ),
-                                  maxLines: 3,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
+                            child: GridView(
+                              padding: const EdgeInsets.all(4),
+                              physics: const BouncingScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              children: List<Widget>.generate(
+                                21,
+                                (int index) {
+                                  final int count = 21;
+                                  final Animation<double> animation =
+                                      Tween<double>(begin: 0.0, end: 1.0)
+                                          .animate(
+                                    CurvedAnimation(
+                                      parent: animationController!,
+                                      curve: Interval((1 / count) * index, 1.0,
+                                          curve: Curves.fastOutSlowIn),
+                                    ),
+                                  );
+                                  animationController?.forward();
+                                  return getTimeBoxUI(
+                                      (index + 1).toString() + '.',
+                                      'Gün',
+                                      animationController!,
+                                      animation);
+                                },
                               ),
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 5, crossAxisSpacing: 2),
                             ),
                           ),
                           AnimatedOpacity(
@@ -187,7 +219,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                             opacity: opacity3,
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  left: 16, bottom: 16, right: 16),
+                                  left: 16, bottom: 0, right: 16),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -251,9 +283,9 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                               ),
                             ),
                           ),
-                          SizedBox(
+                          /*SizedBox(
                             height: MediaQuery.of(context).padding.bottom,
-                          )
+                          )*/
                         ],
                       ),
                     ),
@@ -262,7 +294,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
               ),
             ),
             Positioned(
-              top: (MediaQuery.of(context).size.width / 1.2) - 24.0 - 35,
+              top: (MediaQuery.of(context).size.width / 1.63),
               right: 35,
               child: ScaleTransition(
                 alignment: Alignment.center,
@@ -314,51 +346,63 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
     );
   }
 
-  Widget getTimeBoxUI(String text1, String txt2) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          color: DesignCourseAppTheme.nearlyWhite,
-          borderRadius: const BorderRadius.all(Radius.circular(16.0)),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: DesignCourseAppTheme.grey.withOpacity(0.2),
-                offset: const Offset(1.1, 1.1),
-                blurRadius: 8.0),
-          ],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(
-              left: 18.0, right: 18.0, top: 12.0, bottom: 12.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                text1,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                  letterSpacing: 0.27,
-                  color: DesignCourseAppTheme.nearlyBlue,
+  Widget getTimeBoxUI(String text1, String txt2,
+      AnimationController? animationController, Animation<double> animation) {
+    return AnimatedBuilder(
+        animation: animationController!,
+        builder: (BuildContext context, Widget? child) {
+          return FadeTransition(
+            opacity: animation,
+            child: Transform(
+              transform: Matrix4.translationValues(
+                  0.0, 50 * (1.0 - animation.value), 0.0),
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: DesignCourseAppTheme.nearlyWhite,
+                    borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                          color: DesignCourseAppTheme.grey.withOpacity(0.2),
+                          offset: const Offset(1.1, 1.1),
+                          blurRadius: 8.0),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 18.0, right: 18.0, top: 12.0, bottom: 12.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          text1,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                            letterSpacing: 0.27,
+                            color: DesignCourseAppTheme.nearlyBlue,
+                          ),
+                        ),
+                        Text(
+                          txt2,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w200,
+                            fontSize: 14,
+                            letterSpacing: 0.27,
+                            color: DesignCourseAppTheme.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
-              Text(
-                txt2,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.w200,
-                  fontSize: 14,
-                  letterSpacing: 0.27,
-                  color: DesignCourseAppTheme.grey,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
+        });
   }
 }

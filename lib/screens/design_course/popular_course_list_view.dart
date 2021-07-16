@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../main.dart';
@@ -56,6 +55,7 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
                   );
                   animationController?.forward();
                   return CategoryView(
+                    index: index,
                     callback: widget.callBack,
                     category: Category.popularCourseList[index],
                     animation: animation,
@@ -80,12 +80,13 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
 class CategoryView extends StatelessWidget {
   const CategoryView(
       {Key? key,
+        required this.index,
       this.category,
       this.animationController,
       this.animation,
       this.callback})
       : super(key: key);
-
+  final int index;
   final VoidCallback? callback;
   final Category? category;
   final AnimationController? animationController;
@@ -234,7 +235,9 @@ class CategoryView extends StatelessWidget {
                                 const BorderRadius.all(Radius.circular(16.0)),
                             child: AspectRatio(
                                 aspectRatio: 1.28,
-                                child: Image.asset(category!.imagePath)),
+                                child: Hero(
+                                    tag: 'course$index',
+                                    child: Image.asset(category!.imagePath))),
                           ),
                         ),
                       ),
