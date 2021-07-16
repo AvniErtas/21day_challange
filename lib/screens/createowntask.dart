@@ -9,13 +9,20 @@ class CreateOwnTask extends StatefulWidget {
 
 class _CreateOwnTaskState extends State<CreateOwnTask> {
 
-  List taskname = [];
-  List taskexp = [];
+
+  late String taskname;
+  late String taskexp;
   List tasks = [];
+  List<TextEditingController> _gunController = List.generate(21, (i) => TextEditingController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(onPressed: (){
+      },
+        backgroundColor: Colors.deepOrangeAccent,
+      child: Icon(Icons.add,),
+      ),
       appBar: AppBar(
         title: Text("Kendi Meydan Okumanı Oluştur"),
         backgroundColor: Colors.deepOrangeAccent,
@@ -75,7 +82,7 @@ class _CreateOwnTaskState extends State<CreateOwnTask> {
             return null;
           }
         },
-        onChanged: (value) => setState(() => taskname[index] = value),
+        onChanged: (value) => setState(() => taskname = value),
       );
 
   Widget taskExplanation(index) => TextFormField(
@@ -91,22 +98,30 @@ class _CreateOwnTaskState extends State<CreateOwnTask> {
             return null;
           }
         },
-        onChanged: (value) => setState(() => taskexp[index] = value),
+        onChanged: (value) => setState(() => taskexp = value),
       );
 
-  Widget taskslist(index) => TextFormField(
-        maxLines: 1,
-        decoration: InputDecoration(
-          labelText: "Gün ${index + 1}",
-          border: OutlineInputBorder(),
-        ),
-        validator: (value) {
-          if (value!.length < 2) {
-            return 'Lütfen 2 karakterden uzun bir başlık giriniz';
-          } else {
-            return null;
-          }
-        },
-        onChanged: (value) => setState(() => tasks[index] = value),
-      );
+  Widget taskslist(index) => Row(
+    children: [
+      Icon(Icons.calendar_today),
+      Expanded(
+        child: TextFormField(
+              maxLines: 1,
+              controller: _gunController[index],
+              decoration: InputDecoration(
+                labelText: "Gün ${index + 1}",
+                border: OutlineInputBorder(),
+              ),
+              validator: (value) {
+                if (value!.length < 2) {
+                  return 'Lütfen 2 karakterden uzun bir başlık giriniz';
+                } else {
+                  return null;
+                }
+              },
+              onChanged: (value) => setState(() => tasks[index] = value),
+            ),
+      ),
+    ],
+  );
 }

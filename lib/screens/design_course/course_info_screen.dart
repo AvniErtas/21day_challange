@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_21/screens/taskDetails.dart';
 import 'design_course_app_theme.dart';
 
 class CourseInfoScreen extends StatefulWidget {
@@ -203,6 +204,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                   );
                                   animationController?.forward();
                                   return getTimeBoxUI(
+                                    index,
                                       (index + 1).toString() + '.',
                                       'Gün',
                                       animationController!,
@@ -346,63 +348,70 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
     );
   }
 
-  Widget getTimeBoxUI(String text1, String txt2,
+  Widget getTimeBoxUI(int index,String text1, String txt2,
       AnimationController? animationController, Animation<double> animation) {
-    return AnimatedBuilder(
-        animation: animationController!,
-        builder: (BuildContext context, Widget? child) {
-          return FadeTransition(
-            opacity: animation,
-            child: Transform(
-              transform: Matrix4.translationValues(
-                  0.0, 50 * (1.0 - animation.value), 0.0),
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: DesignCourseAppTheme.nearlyWhite,
-                    borderRadius: const BorderRadius.all(Radius.circular(16.0)),
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                          color: DesignCourseAppTheme.grey.withOpacity(0.2),
-                          offset: const Offset(1.1, 1.1),
-                          blurRadius: 8.0),
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        left: 18.0, right: 18.0, top: 12.0, bottom: 12.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          text1,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14,
-                            letterSpacing: 0.27,
-                            color: DesignCourseAppTheme.nearlyBlue,
-                          ),
-                        ),
-                        Text(
-                          txt2,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w200,
-                            fontSize: 14,
-                            letterSpacing: 0.27,
-                            color: DesignCourseAppTheme.grey,
-                          ),
-                        ),
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => TaskDetails(index)));
+      },
+      child: AnimatedBuilder(
+          animation: animationController!,
+          builder: (BuildContext context, Widget? child) {
+            return FadeTransition(
+              opacity: animation,
+              child: Transform(
+                transform: Matrix4.translationValues(
+                    0.0, 50 * (1.0 - animation.value), 0.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: DesignCourseAppTheme.nearlyWhite,
+                      borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                            color: DesignCourseAppTheme.grey.withOpacity(0.2),
+                            offset: const Offset(1.1, 1.1),
+                            blurRadius: 8.0),
                       ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 18.0, right: 18.0, top: 12.0, bottom: 12.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            text1,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14,
+                              letterSpacing: 0.27,
+                              color: DesignCourseAppTheme.nearlyBlue,
+                            ),
+                          ),
+                          Text(
+                            txt2,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w200,
+                              fontSize: 14,
+                              letterSpacing: 0.27,
+                              color: DesignCourseAppTheme.grey,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          );
-        });
+            );
+          }),
+    );
   }
 }
