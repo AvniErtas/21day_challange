@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:scratcher/scratcher.dart';
 
@@ -11,6 +12,9 @@ class TaskDetails extends StatefulWidget {
 }
 
 class _TaskDetailsState extends State<TaskDetails> {
+
+  String note = "";
+
   @override
   Widget build(BuildContext context) {
     final scratchKey = GlobalKey<ScratcherState>();
@@ -20,6 +24,7 @@ class _TaskDetailsState extends State<TaskDetails> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: InkWell(child: Icon(Icons.edit),onTap: (){
+              showAlertDialog(context);
               /// TODO DİYALOĞU HAZIRLA
             },),
           ),
@@ -140,6 +145,67 @@ class _TaskDetailsState extends State<TaskDetails> {
           ],
         ),
       ),
+    );
+  }
+
+  showAlertDialog(BuildContext context) {
+
+
+    // set up the buttons
+    Widget cancelButton = ElevatedButton(
+      child: Text("Kaydet"),
+      onPressed:  () {
+        Navigator.pop(context);
+        debugPrint("$note");
+      },
+
+    );
+    Widget launchButton = ElevatedButton(
+      child: Text("Vazgeç"),
+      onPressed:  () {
+        setState(() {
+          note = "";
+        });
+        Navigator.pop(context);
+        debugPrint("$note");
+      },
+    );
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Container(child: Image.asset("assets/design_course/interFace3.png"),height: 80,),
+      actions: [
+        TextFormField(
+          maxLines: 3,
+          decoration: InputDecoration(
+            labelText: 'Notunuzu Yazın',
+            border: OutlineInputBorder(),
+          ),
+          validator: (value) {
+            if (value!.length < 2) {
+              return 'Lütfen 2 karakterden uzun bir başlık giriniz';
+            } else {
+              return null;
+            }
+          },
+          onChanged: (value) => setState(() => note = value),
+        ),
+        SizedBox(height: 5,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            cancelButton,
+            launchButton,
+          ],
+        ),
+
+      ],
+    );
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }
