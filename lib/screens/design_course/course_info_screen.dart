@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_21/documents/challanges.dart';
 import 'package:flutter_app_21/screens/taskDetails.dart';
+import 'package:flutter_app_21/tools/expandableFab.dart';
 import 'design_course_app_theme.dart';
 
 class CourseInfoScreen extends StatefulWidget {
+  int index;
+  CourseInfoScreen(this.index);
+
   @override
   _CourseInfoScreenState createState() => _CourseInfoScreenState();
 }
@@ -40,6 +45,23 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
     setState(() {
       opacity3 = 1.0;
     });
+  }
+
+  void _showAction(BuildContext context, int index) {
+    showDialog<void>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: Text("1"),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('CLOSE'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -171,7 +193,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                               padding: const EdgeInsets.only(
                                   left: 16, right: 16, top: 8, bottom: 8),
                               child: Text(
-                                'Bu mücadelede, daha iyi bir gece uykusu çekmek ve yatma vaktinde daha az stresli hissetmek için bazı uyku hileleri ve ipuçları bulacaksınız.',
+                                Challanges.challangeList[widget.index].description,
                                 textAlign: TextAlign.justify,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w300,
@@ -216,7 +238,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                       crossAxisCount: 5, crossAxisSpacing: 2),
                             ),
                           ),
-                          AnimatedOpacity(
+                         /* AnimatedOpacity(
                             duration: const Duration(milliseconds: 500),
                             opacity: opacity3,
                             child: Padding(
@@ -284,7 +306,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                 ],
                               ),
                             ),
-                          ),
+                          ),*/
                           /*SizedBox(
                             height: MediaQuery.of(context).padding.bottom,
                           )*/
@@ -342,6 +364,23 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                 ),
               ),
             )
+          ],
+        ),
+        floatingActionButton: ExpandableFab(
+          distance: 112.0,
+          children: [
+            ActionButton(
+              onPressed: () => _showAction(context, 0),
+              icon: const Icon(Icons.format_size),
+            ),
+            ActionButton(
+              onPressed: () => _showAction(context, 1),
+              icon: const Icon(Icons.insert_photo),
+            ),
+            ActionButton(
+              onPressed: () => _showAction(context, 2),
+              icon: const Icon(Icons.videocam),
+            ),
           ],
         ),
       ),

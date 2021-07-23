@@ -1,0 +1,12 @@
+[
+  {
+    "challangesName" : "Gece Rutini",
+    "description" : "Buraya açıklama yazılacak",
+    "iconKey" : "geceRutini",
+    "days" : [
+      "Günü düşünün.Oldukça iyi giden en az bir şeyi yazın.",
+      "Görev 2",
+      "Görev 3..."
+    ]
+  }
+]

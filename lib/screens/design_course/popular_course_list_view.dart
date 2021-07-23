@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_21/documents/challanges.dart';
+import 'package:flutter_app_21/model/Challange.dart';
 
 import '../../main.dart';
 import 'design_course_app_theme.dart';
@@ -42,9 +44,9 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.vertical,
               children: List<Widget>.generate(
-                Category.popularCourseList.length,
+                Challanges.challangeList.length,
                 (int index) {
-                  final int count = Category.popularCourseList.length;
+                  final int count = Challanges.challangeList.length;
                   final Animation<double> animation =
                       Tween<double>(begin: 0.0, end: 1.0).animate(
                     CurvedAnimation(
@@ -57,7 +59,7 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
                   return CategoryView(
                     index: index,
                     callback: widget.callBack,
-                    category: Category.popularCourseList[index],
+                    challange: Challanges.challangeList[index],
                     animation: animation,
                     animationController: animationController,
                   );
@@ -81,14 +83,14 @@ class CategoryView extends StatelessWidget {
   const CategoryView(
       {Key? key,
         required this.index,
-      this.category,
+      required this.challange,
       this.animationController,
       this.animation,
       this.callback})
       : super(key: key);
   final int index;
   final VoidCallback? callback;
-  final Category? category;
+  final Challange challange;
   final AnimationController? animationController;
   final Animation<double>? animation;
 
@@ -132,7 +134,7 @@ class CategoryView extends StatelessWidget {
                                             padding: const EdgeInsets.only(
                                                 top: 16, left: 16, right: 16),
                                             child: Text(
-                                              category!.title,
+                                              challange.challangesName,
                                               textAlign: TextAlign.left,
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w600,
@@ -143,7 +145,7 @@ class CategoryView extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          Padding(
+                                          /*Padding(
                                             padding: const EdgeInsets.only(
                                                 top: 8,
                                                 left: 16,
@@ -157,7 +159,7 @@ class CategoryView extends StatelessWidget {
                                                   CrossAxisAlignment.center,
                                               children: <Widget>[
                                                 Text(
-                                                  '${category!.lessonCount} lesson',
+                                                  '${challange..lessonCount} lesson',
                                                   textAlign: TextAlign.left,
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w200,
@@ -196,7 +198,7 @@ class CategoryView extends StatelessWidget {
                                                 )
                                               ],
                                             ),
-                                          ),
+                                          ),*/
                                         ],
                                       ),
                                     ),
@@ -237,7 +239,7 @@ class CategoryView extends StatelessWidget {
                                 aspectRatio: 1.28,
                                 child: Hero(
                                     tag: 'course$index',
-                                    child: Image.asset(category!.imagePath))),
+                                    child: Image.asset(challange.imagePath))),
                           ),
                         ),
                       ),

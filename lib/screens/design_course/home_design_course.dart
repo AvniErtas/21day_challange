@@ -118,7 +118,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
         ),
         CategoryListView(
           callBack: () {
-            moveTo();
+            moveTo(1);
           },
         ),
       ],
@@ -145,7 +145,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
           Flexible(
             child: PopularCourseListView(
               callBack: () {
-                moveTo();
+                moveTo(1);
               },
             ),
           )
@@ -154,11 +154,11 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
     );
   }
 
-  void moveTo() {
+  void moveTo(int index) {
     Navigator.push<dynamic>(
       context,
       MaterialPageRoute<dynamic>(
-        builder: (BuildContext context) => CourseInfoScreen(),
+        builder: (BuildContext context) => CourseInfoScreen(index),
       ),
     );
   }
