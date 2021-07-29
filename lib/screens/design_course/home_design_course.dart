@@ -25,6 +25,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 8),
       color: DesignCourseAppTheme.nearlyWhite,
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -41,17 +42,13 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
                   child: Column(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          height: 70,
-                          color: Colors.transparent,
-                          child: Center(
-                              child: Text(
-                            "When one door of happiness closes, another opens; but often we look so long at the closed door that we do not see the one which has been opened for us",
-                            style: TextStyle(fontSize: 14),
-                            textAlign: TextAlign.center,
-                          )),
-                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 4.0),
+                        child: Center(
+                            child: Text(
+                          "When one door of happiness closes, another opens; but often we look so long at the closed door that we do not see the one which has been opened for us",
+                          style: TextStyle(fontSize: 12),
+                          textAlign: TextAlign.center,
+                        )),
                       ),
                       //getSearchBarUI(),
                       getCategoryUI(),
@@ -74,60 +71,51 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(top: 8.0, left: 18, right: 16),
-          child: Text(
-            'Kategoriler',
-            textAlign: TextAlign.left,
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 22,
-              letterSpacing: 0.27,
-              color: DesignCourseAppTheme.darkerText,
-            ),
+        CategoryListView(),
+        Text(
+          'Kategoriler',
+          textAlign: TextAlign.left,
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 19,
+            letterSpacing: 0.27,
+            color: DesignCourseAppTheme.darkerText,
           ),
         ),
         const SizedBox(
-          height: 16,
+          height: 4,
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16),
+          padding: const EdgeInsets.only(left: 4, right: 4),
           child: Row(
             children: <Widget>[
               getButtonUI(CategoryType.first, categoryType == CategoryType.first),
               const SizedBox(
-                width: 16,
+                width: 4,
               ),
               getButtonUI(
                   CategoryType.second, categoryType == CategoryType.second),
               const SizedBox(
-                width: 16,
+                width: 4,
               ),
               getButtonUI(
                   CategoryType.third, categoryType == CategoryType.third),
               const SizedBox(
-                width: 16,
+                width: 4,
               ),
               getButtonUI(
                   CategoryType.last, categoryType == CategoryType.last),
             ],
           ),
         ),
-        const SizedBox(
-          height: 16,
-        ),
-        CategoryListView(
-          callBack: () {
-            moveTo(1);
-          },
-        ),
+
       ],
     );
   }
 
   Widget getPopularCourseUI() {
     return Padding(
-      padding: const EdgeInsets.only(top: 8.0, left: 18, right: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 4),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,16 +125,13 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
             textAlign: TextAlign.left,
             style: TextStyle(
               fontWeight: FontWeight.w600,
-              fontSize: 22,
+              fontSize: 19,
               letterSpacing: 0.27,
               color: DesignCourseAppTheme.darkerText,
             ),
           ),
           Flexible(
             child: PopularCourseListView(
-              callBack: () {
-                moveTo(1);
-              },
             ),
           )
         ],
@@ -154,14 +139,6 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
     );
   }
 
-  void moveTo(int index) {
-    Navigator.push<dynamic>(
-      context,
-      MaterialPageRoute<dynamic>(
-        builder: (BuildContext context) => CourseInfoScreen(index),
-      ),
-    );
-  }
 
   Widget getButtonUI(CategoryType categoryTypeData, bool isSelected) {
 
@@ -203,7 +180,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
             },
             child: Padding(
               padding: const EdgeInsets.only(
-                  top: 12, bottom: 12, left: 18, right: 18),
+                  top: 6, bottom: 6, left: 9, right: 9),
               child: Center(
                 child: Text(
                   categoryName,

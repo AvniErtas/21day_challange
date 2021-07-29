@@ -80,9 +80,9 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                 AspectRatio(
                   aspectRatio: 1.2,
                   child: Hero(
-                      tag: 'course0',
-                      child:
-                          Image.asset('assets/design_course/interFace3.png')),
+                      tag: widget.index,
+                      child: Image.asset(
+                          Challanges.challangeList[widget.index].imagePath)),
                 ),
               ],
             ),
@@ -193,7 +193,8 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                               padding: const EdgeInsets.only(
                                   left: 16, right: 16, top: 8, bottom: 8),
                               child: Text(
-                                Challanges.challangeList[widget.index].description,
+                                Challanges
+                                    .challangeList[widget.index].description,
                                 textAlign: TextAlign.justify,
                                 style: TextStyle(
                                   fontWeight: FontWeight.w300,
@@ -226,7 +227,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                   );
                                   animationController?.forward();
                                   return getTimeBoxUI(
-                                    index,
+                                      index,
                                       (index + 1).toString() + '.',
                                       'Gün',
                                       animationController!,
@@ -238,7 +239,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                       crossAxisCount: 5, crossAxisSpacing: 2),
                             ),
                           ),
-                         /* AnimatedOpacity(
+                          /* AnimatedOpacity(
                             duration: const Duration(milliseconds: 500),
                             opacity: opacity3,
                             child: Padding(
@@ -369,17 +370,29 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
         floatingActionButton: ExpandableFab(
           distance: 112.0,
           children: [
-            ActionButton(
+            FloatingActionButton.extended(
               onPressed: () => _showAction(context, 0),
-              icon: const Icon(Icons.format_size),
+              icon: const Icon(Icons.refresh),
+              label: Text(
+                "Yeniden Başlat",
+                style: TextStyle(fontSize: 13),
+              ),
             ),
-            ActionButton(
+            FloatingActionButton.extended(
               onPressed: () => _showAction(context, 1),
-              icon: const Icon(Icons.insert_photo),
+              icon: const Icon(Icons.notification_important),
+              label: Text(
+                "Bildirimler",
+                style: TextStyle(fontSize: 13),
+              ),
             ),
-            ActionButton(
+            FloatingActionButton.extended(
               onPressed: () => _showAction(context, 2),
-              icon: const Icon(Icons.videocam),
+              icon: const Icon(Icons.hide_source),
+              label: Text(
+                "Gizle",
+                style: TextStyle(fontSize: 13),
+              ),
             ),
           ],
         ),
@@ -387,13 +400,12 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
     );
   }
 
-  Widget getTimeBoxUI(int index,String text1, String txt2,
+  Widget getTimeBoxUI(int index, String text1, String txt2,
       AnimationController? animationController, Animation<double> animation) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => TaskDetails(index)));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => TaskDetails(index,widget.index)));
       },
       child: AnimatedBuilder(
           animation: animationController!,
@@ -408,7 +420,8 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                   child: Container(
                     decoration: BoxDecoration(
                       color: DesignCourseAppTheme.nearlyWhite,
-                      borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(16.0)),
                       boxShadow: <BoxShadow>[
                         BoxShadow(
                             color: DesignCourseAppTheme.grey.withOpacity(0.2),
@@ -416,35 +429,31 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                             blurRadius: 8.0),
                       ],
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 18.0, right: 18.0, top: 12.0, bottom: 12.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            text1,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14,
-                              letterSpacing: 0.27,
-                              color: DesignCourseAppTheme.nearlyBlue,
-                            ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          text1,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                            letterSpacing: 0.27,
+                            color: DesignCourseAppTheme.nearlyBlue,
                           ),
-                          Text(
-                            txt2,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontWeight: FontWeight.w200,
-                              fontSize: 14,
-                              letterSpacing: 0.27,
-                              color: DesignCourseAppTheme.grey,
-                            ),
+                        ),
+                        Text(
+                          txt2,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w200,
+                            fontSize: 14,
+                            letterSpacing: 0.27,
+                            color: DesignCourseAppTheme.grey,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

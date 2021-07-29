@@ -17,6 +17,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Home(),
+
       debugShowCheckedModeBanner: false,
     );
   }
@@ -61,6 +62,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       shadowSpeed: 550,
       openIcon: Icon(Icons.menu_open, color: Color(0xFF1f186f)),
       closeIcon: Icon(Icons.arrow_back_ios, color: Color(0xFF1f186f)),
+
       shadowColor: Color(0xFF4c41a3),
       backgroundGradient: LinearGradient(
         colors: [Color(0xFF4c41a3), Color(0xFF1f186f)],
@@ -234,6 +236,15 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       ),
       homePageContent: Stack(children: [
         DesignCourseHomeScreen(),
+        Padding(
+          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.05,right: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Icon(Icons.attach_money,color: Colors.green,),
+            ],
+          ),
+        ),
         bottomBar(),
       ],
       ),

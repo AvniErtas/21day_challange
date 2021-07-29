@@ -1,13 +1,13 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app_21/main.dart';
 import 'package:flutter_app_21/screens/design_course/design_course_app_theme.dart';
 import 'package:flutter_app_21/screens/design_course/models/category.dart';
 
-class CategoryListView extends StatefulWidget {
-  const CategoryListView({Key? key, this.callBack}) : super(key: key);
+import 'course_info_screen.dart';
 
-  final Function()? callBack;
+class CategoryListView extends StatefulWidget {
+  const CategoryListView({Key? key}) : super(key: key);
+
   @override
   _CategoryListViewState createState() => _CategoryListViewState();
 }
@@ -36,45 +36,42 @@ class _CategoryListViewState extends State<CategoryListView>
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 16, bottom: 16),
-      child: Container(
-        height: 134,
-        width: double.infinity,
-        child: FutureBuilder<bool>(
-          future: getData(),
-          builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-            if (!snapshot.hasData) {
-              return const SizedBox();
-            } else {
-              return ListView.builder(
-                padding: const EdgeInsets.only(
-                    top: 0, bottom: 0, right: 16, left: 16),
-                itemCount: Category.categoryList.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (BuildContext context, int index) {
-                  final int count = Category.categoryList.length > 10
-                      ? 10
-                      : Category.categoryList.length;
-                  final Animation<double> animation =
-                      Tween<double>(begin: 0.0, end: 1.0).animate(
-                          CurvedAnimation(
-                              parent: animationController!,
-                              curve: Interval((1 / count) * index, 1.0,
-                                  curve: Curves.fastOutSlowIn)));
-                  animationController?.forward();
+    return Container(
+      height: MediaQuery.of(context).size.height*0.15,
+      width: double.infinity,
+      child: FutureBuilder<bool>(
+        future: getData(),
+        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+          if (!snapshot.hasData) {
+            return const SizedBox();
+          } else {
+            return ListView.builder(
+              padding: const EdgeInsets.only(
+                  top: 0, bottom: 0, right: 8, left: 8),
+              itemCount: Category.categoryList.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (BuildContext context, int index) {
+                final int count = Category.categoryList.length > 10
+                    ? 10
+                    : Category.categoryList.length;
+                final Animation<double> animation =
+                    Tween<double>(begin: 0.0, end: 1.0).animate(
+                        CurvedAnimation(
+                            parent: animationController!,
+                            curve: Interval((1 / count) * index, 1.0,
+                                curve: Curves.fastOutSlowIn)));
+                animationController?.forward();
 
-                  return CategoryView(
-                    category: Category.categoryList[index],
-                    animation: animation,
-                    animationController: animationController,
-                    callback: widget.callBack,
-                  );
-                },
-              );
-            }
-          },
-        ),
+                return CategoryView(
+                  index: index,
+                  category: Category.categoryList[index],
+                  animation: animation,
+                  animationController: animationController,
+                );
+              },
+            );
+          }
+        },
       ),
     );
   }
@@ -83,13 +80,13 @@ class _CategoryListViewState extends State<CategoryListView>
 class CategoryView extends StatelessWidget {
   const CategoryView(
       {Key? key,
+      required this.index,
       this.category,
       this.animationController,
-      this.animation,
-      this.callback})
+      this.animation})
       : super(key: key);
 
-  final VoidCallback? callback;
+  final int index;
   final Category? category;
   final AnimationController? animationController;
   final Animation<double>? animation;
@@ -106,7 +103,7 @@ class CategoryView extends StatelessWidget {
                 100 * (1.0 - animation!.value), 0.0, 0.0),
             child: InkWell(
               splashColor: Colors.transparent,
-              onTap: callback,
+              onTap: () => nextPage(context, index),
               child: SizedBox(
                 width: 280,
                 child: Stack(
@@ -114,13 +111,13 @@ class CategoryView extends StatelessWidget {
                     Container(
                       child: Row(
                         children: <Widget>[
-                          const SizedBox(
-                            width: 48,
+                           SizedBox(
+                            width: MediaQuery.of(context).size.width*0.1,
                           ),
                           Expanded(
                             child: Container(
                               decoration: BoxDecoration(
-                                color: HexColor('#F8FAFB'),
+                                color: HexColor('#DEE8E4'),
                                 borderRadius: const BorderRadius.all(
                                     Radius.circular(16.0)),
                               ),
@@ -133,24 +130,22 @@ class CategoryView extends StatelessWidget {
                                     child: Container(
                                       child: Column(
                                         children: <Widget>[
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 16),
-                                            child: Text(
-                                              category!.title,
-                                              textAlign: TextAlign.left,
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 16,
-                                                letterSpacing: 0.27,
-                                                color: DesignCourseAppTheme
-                                                    .darkerText,
-                                              ),
+                                          Spacer(),
+                                          Text(
+                                            category!.title,
+                                            textAlign: TextAlign.left,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 14,
+                                              letterSpacing: 0.27,
+                                              color: DesignCourseAppTheme
+                                                  .darkerText,
                                             ),
                                           ),
-                                          const Expanded(
+                                          /*const Expanded(
                                             child: SizedBox(),
-                                          ),
+                                          ),*/
+                                          Spacer(),
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 right: 16, bottom: 8),
@@ -162,7 +157,7 @@ class CategoryView extends StatelessWidget {
                                                   CrossAxisAlignment.center,
                                               children: <Widget>[
                                                 Text(
-                                                  '${category!.lessonCount} lesson',
+                                                  '2 / ${category!.lessonCount}',
                                                   textAlign: TextAlign.left,
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w200,
@@ -176,7 +171,7 @@ class CategoryView extends StatelessWidget {
                                                   child: Row(
                                                     children: <Widget>[
                                                       Text(
-                                                        '${category!.rating}',
+                                                        '%${category!.rating}',
                                                         textAlign:
                                                             TextAlign.left,
                                                         style: TextStyle(
@@ -189,20 +184,21 @@ class CategoryView extends StatelessWidget {
                                                                   .grey,
                                                         ),
                                                       ),
-                                                      Icon(
-                                                        Icons.star,
+                                                     /* Icon(
+                                                        Icons.,
                                                         color:
                                                             DesignCourseAppTheme
                                                                 .nearlyBlue,
                                                         size: 20,
-                                                      ),
+                                                      ),*/
                                                     ],
                                                   ),
                                                 )
                                               ],
                                             ),
                                           ),
-                                          Padding(
+                                          Spacer(),
+                                          /*Padding(
                                             padding: const EdgeInsets.only(
                                                 bottom: 16, right: 16),
                                             child: Row(
@@ -246,7 +242,7 @@ class CategoryView extends StatelessWidget {
                                                 )
                                               ],
                                             ),
-                                          ),
+                                          ),*/
                                         ],
                                       ),
                                     ),
@@ -261,14 +257,14 @@ class CategoryView extends StatelessWidget {
                     Container(
                       child: Padding(
                         padding: const EdgeInsets.only(
-                            top: 24, bottom: 24, left: 16),
+                             left: 16),
                         child: Row(
                           children: <Widget>[
                             ClipRRect(
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(16.0)),
                               child: AspectRatio(
-                                  aspectRatio: 1.0,
+                                  aspectRatio: 0.7,
                                   child: Image.asset(category!.imagePath)),
                             )
                           ],
@@ -282,6 +278,15 @@ class CategoryView extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  nextPage(BuildContext context, int index) {
+    Navigator.push<dynamic>(
+      context,
+      MaterialPageRoute<dynamic>(
+        builder: (BuildContext context) => CourseInfoScreen(index),
+      ),
     );
   }
 }

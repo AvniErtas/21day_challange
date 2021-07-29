@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_21/documents/challanges.dart';
 import 'package:scratcher/scratcher.dart';
 
 class TaskDetails extends StatefulWidget {
-  final index;
+  final dayIndex;
+  final challangeIndex;
 
-  const TaskDetails(this.index,{ Key? key}) : super(key: key);
+  const TaskDetails(this.dayIndex,this.challangeIndex,{ Key? key}) : super(key: key);
 
   @override
   _TaskDetailsState createState() => _TaskDetailsState();
@@ -37,7 +39,7 @@ class _TaskDetailsState extends State<TaskDetails> {
               child: Center(child: Text("90",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),)),
           ),
         ],
-        title: Text("Gün ${widget.index+1}"),
+        title: Text("Gün ${widget.dayIndex+1}"),
         backgroundColor: Colors.deepOrangeAccent,
       ),
       body: Padding(
@@ -68,7 +70,7 @@ class _TaskDetailsState extends State<TaskDetails> {
                   child: Center(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text("Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",style: TextStyle(fontSize: 16,),textAlign: TextAlign.center,),
+                      child: Text(Challanges.challangeList[widget.challangeIndex].days[widget.dayIndex],style: TextStyle(fontSize: 16,),textAlign: TextAlign.center,),
                     ),
                   ),
                 ),
