@@ -3,7 +3,7 @@ import 'package:flutter_app_21/model/Challange.dart';
 class Challanges {
   static List<Challange> challangeList = <Challange>[
     Challange(
-        challangesName: "Gece Rutini-/Finish",
+        challangesName: "Gece Rutini",
         description: "Bu mücadelede , daha iyi bir gece uykusu çekmek ve yatma vaktinde daha az stresli hissetmek için bazı ipuçları bulacaksınız.",
         imagePath: "assets/design_course/interFace1.png",
         days: [
@@ -26,10 +26,11 @@ class Challanges {
           "Yatmadan önce saçlarınızı güzelce yıkayın ve saç derinize masaj yaparak kendinizi rahatlatın.",
           "Bugün geçirdiğiniz günü derinlemesine düşünün , olumsuz şeyleri bir kenara bırakın , başarılarınıza odaklanın.",
           "Bugün yatağınıza 1 saat erken girin ve güzel , sağlıklı bir uyku çekin.",
-          "Hayatınızı olumsuz etkileyen ne varsa aklınızdan silin ve herşeyin iyi olacağına inanın , inanmak başarmanın yarısıdır diye boşuna dememişler."
+          "Hayatınızı olumsuz etkileyen ne varsa aklınızdan silin ve herşeyin iyi olacağına inanın , inanmak başarmanın yarısıdır diye boşuna dememişler.",
+              "21"
         ]),
     Challange(
-        challangesName: "Günlük Tutma/Finish",
+        challangesName: "Günlük Tutma",
         description:
             "Günlük tutma alışkanlığınızı geliştirmeye başlamanıza yardımcı olacak 21 günlük ipuçları.",
         imagePath: "assets/design_course/interFace1.png",
@@ -57,7 +58,7 @@ class Challanges {
           "Hayatınızda eksik olan bir şey nedir ve bunu nasıl değiştirebilirsiniz ?"
         ]),
     Challange(
-        challangesName: "İyimserlik mücadelesi/Finish",
+        challangesName: "İyimserlik mücadelesi",
         description:
             "iyimserlik, pozitif bir tavra sahip olmayı seçerek hayatınızı yaşamak üzerine bilinçli bir karardır. Olayların olumlu taraflarını görebilmek , canlandırır ve umut verir.",
         imagePath: "assets/design_course/interFace1.png",
@@ -85,7 +86,7 @@ class Challanges {
           "Gelecekten umutlu olmak için üç iyi sebep bul"
         ]),
     Challange(
-        challangesName: "Öz Bakım/Finish",
+        challangesName: "Öz Bakım",
         description: "İşte evde iken kendin için yapabileceğin tam 21 şey.",
         imagePath: "assets/design_course/interFace1.png",
         days: [
@@ -112,7 +113,7 @@ class Challanges {
           "Gelecek için hedeflerini belirle"
         ]),
     Challange(
-        challangesName: "Düzenli olmak/Finish",
+        challangesName: "Düzenli olmak",
         description:
             "Unutma ki dağınıklıktan kurtulmak , organize olmanın ilk adımıdır.",
         imagePath: "assets/design_course/interFace1.png",
@@ -140,7 +141,7 @@ class Challanges {
           "Eski resimlerinizi düzenleyin ve anılarınıza sahip çıkın."
         ]),
     Challange(
-        challangesName: "Yemek Pişirme/Finish",
+        challangesName: "Yemek Pişirme",
         description:
             "Yemek yapmaktan keyif alıyor musunuz ? O zaman bu sizin için ideal bir egzersizdir. Burada yemeklerinizi çeşitlendirmek için 21 eğlenceli fikir bulacaksınız.",
         imagePath: "assets/design_course/interFace1.png",
@@ -168,7 +169,7 @@ class Challanges {
           "Bugün bir şef ol ve en sevdiğin arkadaşlarına güzel bir yemek hazırla."
         ]),
     Challange(
-        challangesName: "Kendinizi şımartın/Finish",
+        challangesName: "Kendinizi şımartın",
         description:
             "İşte kendinizi yenilemek ve içinizdeki cevheri açığa çıkarmak için günlük hayatınızda uygulayabileceğiniz 21 kişisel bakım önerisi",
         imagePath: "assets/design_course/interFace1.png",
@@ -196,7 +197,7 @@ class Challanges {
           "Güçlü yönlerinizi bir kağıda yazın ve bunlarla gurur duyun."
         ]),
     Challange(
-        challangesName: "İyilik/Finish",
+        challangesName: "İyilik",
         description:
             "Her şeyin her an olabileceği bir dünyada nazik biri olun. Burada her gün yaşamınıza katabileceğiniz 21 nezaket eylemi bulacaksınız.",
         imagePath: "assets/design_course/interFace1.png",
@@ -224,7 +225,7 @@ class Challanges {
           "Eğer durumunuz el veriyorsa , markette başkasının aldıklarını siz ödeyin."
         ]),
     Challange(
-        challangesName: "Olumlu ifadeler/Finish",
+        challangesName: "Olumlu ifadeler",
         description:
             "Olumlu ifadeler kullanmak , kendinizi daha güvende hissetmenize ve olumlu hisleri arttırmanıza yardımcı olabilir. Güne başlamanın harika bir yolu olumlu düşünmektir.",
         imagePath: "assets/design_course/interFace1.png",
@@ -280,7 +281,7 @@ class Challanges {
           ""
         ]),
     Challange(
-        challangesName: "Verimlilik/Finish",
+        challangesName: "Verimlilik",
         description:
             "Bu mücadele sizi 21 gün boyunca her gün uygulamanız için tek bir verimlilik görevine teşvik edecek.",
         imagePath: "assets/design_course/interFace1.png",
@@ -308,7 +309,7 @@ class Challanges {
           "Bu yıl başarmak istediklerinizi bir kağıda yazın ve neler yapmalısınız madde madde belirleyin."
         ]),
     Challange(
-        challangesName: "Abur cubura son/Finish",
+        challangesName: "Abur cubura son",
         description:
             "Sağlıklı bir yaşam tarzı için küçük adımlarla başlayın ve bu 21 gün boyunca tüm abur cuburlardan kurtulun.",
         imagePath: "assets/design_course/interFace1.png",
@@ -336,7 +337,7 @@ class Challanges {
           "Bütün görevleri tamamladınız , ödül olarak küçük bir parça biter'i hak ettiniz."
         ]),
     Challange(
-        challangesName: "Sosyal Medya Detoksu/Finish",
+        challangesName: "Sosyal Medya Detoksu",
         description:
             "Bu 21 küçük adım , internetten kopmanın ne kadar güzel olduğunu farketmenizi sağlayacak.",
         imagePath: "assets/design_course/interFace1.png",
@@ -364,7 +365,7 @@ class Challanges {
           "Bugün telefonunuz olmadan egzersizinizi yapın , umarım bu 21 günlük alıştırma size teknolojiden uzak bir hayatın kıymetini gözler önüne sermiştir."
         ]),
     Challange(
-        challangesName: "Pozitif Düşünme/Finish",
+        challangesName: "Pozitif Düşünme",
         description:
             "Düşünme şeklinizi değiştirmek, hayatınızda istediğiniz sonuçları elde etmenin anahtarı olabilir. Düşüncelerinize nasıl hakim olacağınızı öğrenirseniz , tüm dünyanız değişir.",
         imagePath: "assets/design_course/interFace1.png",
@@ -392,7 +393,7 @@ class Challanges {
           "Tebrikler 21 günlük pozitif düşünce mücadelesinin son günündesin , artık bunu alışkanlık haline getirdiğini düşünüyorum. Hayat ne olursa olsun yaşamaya değerdir. "
         ]),
     Challange(
-        challangesName: "Sabah Rutini/Finish",
+        challangesName: "Sabah Rutini",
         description:
             "Bu bölümde , güne doğru bir başlangıç yapmanıza yardımcı olacak 21 sabah alışkanlığını paylaşacağız.",
         imagePath: "assets/design_course/interFace1.png",
@@ -420,7 +421,7 @@ class Challanges {
           "Her gün yapacaklarını ajandana not al ve İŞE KOYUL !"
         ]),
     Challange(
-        challangesName: "Yeni Yıl , Yeni Siz/Finish",
+        challangesName: "Yeni Yıl , Yeni Siz",
         description:
             "Önümüzdeki birkaç ay güzel bir dönüşüm dönemi olsun. Yeni başlangıçların sihrine güvenin.",
         imagePath: "assets/design_course/interFace1.png",
@@ -448,7 +449,7 @@ class Challanges {
           "Her yeni günün değerini bilin ve gününüzü doyasıya yaşayın."
         ]),
     Challange(
-        challangesName: "Güven/Finish",
+        challangesName: "Güven",
         description:
             "Güven , sizin yarattığınız bir şeydir. Her şeyi başarabileceğinize dair bir kesinlik hissidir. Burada kendinize daha fazla güvenmenin 21 yolunu bulacaksınız.",
         imagePath: "assets/design_course/interFace1.png",
@@ -476,7 +477,7 @@ class Challanges {
           "Hayatınızdaki insanlara ve en önemlisi kendinize güven vermeye devam edin !"
         ]),
     Challange(
-        challangesName: "Çiftler için Alışkanlıklar/Finish",
+        challangesName: "Çiftler için Alışkanlıklar",
         description:
             "Kelimeler olmadan 'Seni Seviyorum' demenin 21 yolu. Bu meydan okumalar , sağlam bir ilişki kurmanıza ve sevgilinize karşı daha sevecen , nazik ve düşünceli olmanıza yardımcı olacaktır.",
         imagePath: "assets/design_course/interFace1.png",
@@ -504,7 +505,7 @@ class Challanges {
           "Biraz erken kalkıp partnerinizi uyurken izleyin."
         ]),
     Challange(
-        challangesName: "Çalışma Zorluğu/Finish",
+        challangesName: "Çalışma Zorluğu",
         description: "Stres gerçektir, ertelemek de öyledir. 21 gün içinde nasıl etkili bir şekilde çalışacağınız öğrenmeye hazır mısınız ? ",
         imagePath: "assets/design_course/interFace1.png",
         days: [
@@ -531,7 +532,7 @@ class Challanges {
           "Her gününüzü yatmadan önce mutlaka planlayın."
         ]),
     Challange(
-        challangesName: "Zihin Sağlığı/Finish",
+        challangesName: "Zihin Sağlığı",
         description: "Kendinize zaman ayırmak , beden ve ruhunuzu dinlemek sağlığınız için çok önemlidir. Lisanslı terapistler lmasak da , sağlıklı bir zihin gelişimi için işte size birkaç ipucu",
         imagePath: "assets/design_course/interFace1.png",
         days: [

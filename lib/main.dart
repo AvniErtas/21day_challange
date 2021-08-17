@@ -8,6 +8,16 @@ import 'package:flutter_app_21/screens/settingspage.dart';
 import 'fitness_app_theme.dart';
 import 'screens/design_course/home_design_course.dart';
 
+
+/* //TODO
+* İconlar belirlenecek
+İyi günler,geceler,günaydın yazısı hazırlanacak
+* EKsik datalar tamamlanacak
+* Ayarlar sayfası oluşturulacak
+*Kazımayı atla butonu düzeltilecek
+*
+ */
+
 void main() {
   runApp(MainApp());
 }

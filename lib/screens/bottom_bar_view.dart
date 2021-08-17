@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_app_21/screens/design_course/models/tabIcon_data.dart';
+import 'package:flutter_app_21/screens/profilepage.dart';
 import '../../main.dart';
 import '../fitness_app_theme.dart';
 import 'createowntask.dart';
@@ -69,7 +70,7 @@ class _BottomBarViewState extends State<BottomBarView>
                                     widget.changeIndex!(0);
                                   }),
                             ),
-                            Expanded(
+                            /*Expanded(
                               child: TabIcons(
                                   tabIconData: widget.tabIconsList?[1],
                                   removeAllSelect: () {
@@ -77,7 +78,7 @@ class _BottomBarViewState extends State<BottomBarView>
                                         widget.tabIconsList?[1]);
                                     widget.changeIndex!(1);
                                   }),
-                            ),
+                            ),*/
                             SizedBox(
                               width: Tween<double>(begin: 0.0, end: 1.0)
                                       .animate(CurvedAnimation(
@@ -86,7 +87,7 @@ class _BottomBarViewState extends State<BottomBarView>
                                       .value *
                                   64.0,
                             ),
-                            Expanded(
+                            /*Expanded(
                               child: TabIcons(
                                   tabIconData: widget.tabIconsList?[2],
                                   removeAllSelect: () {
@@ -94,9 +95,10 @@ class _BottomBarViewState extends State<BottomBarView>
                                         widget.tabIconsList?[2]);
                                     widget.changeIndex!(2);
                                   }),
-                            ),
+                            ),*/
                             Expanded(
                               child: TabIcons(
+                                index: 3,
                                   tabIconData: widget.tabIconsList?[3],
                                   removeAllSelect: () {
                                     setRemoveAllSelection(
@@ -201,11 +203,12 @@ class _BottomBarViewState extends State<BottomBarView>
 }
 
 class TabIcons extends StatefulWidget {
-  const TabIcons({Key? key, this.tabIconData, this.removeAllSelect})
+  const TabIcons({Key? key, this.tabIconData, this.removeAllSelect, this.index})
       : super(key: key);
 
   final TabIconData? tabIconData;
   final Function()? removeAllSelect;
+  final int? index;
   @override
   _TabIconsState createState() => _TabIconsState();
 }
@@ -243,6 +246,10 @@ class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
           onTap: () {
             if (!widget.tabIconData!.isSelected) {
               setAnimation();
+
+            }
+            if(widget.index==3){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfilePage()));
             }
           },
           child: IgnorePointer(

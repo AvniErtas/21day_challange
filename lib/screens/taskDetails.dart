@@ -16,6 +16,8 @@ class TaskDetails extends StatefulWidget {
 class _TaskDetailsState extends State<TaskDetails> {
 
   String note = "";
+  var isFinish = true;
+  var isFinishAd = true;
 
   @override
   Widget build(BuildContext context) {
@@ -42,122 +44,141 @@ class _TaskDetailsState extends State<TaskDetails> {
         title: Text("Gün ${widget.dayIndex+1}"),
         backgroundColor: Colors.deepOrangeAccent,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text("Bugünün Meydan Okumasını Görmek İçin Kazı",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
-            SizedBox(height: 5,),
-            Center(
-              child: Scratcher(
-                key: scratchKey,
-                brushSize: 30,
-                threshold: 0,
-                //rebuildOnResize: true,
-                color: Colors.red,
-                onChange: (value) => print("Scratch progress: $value%"),
-                onThreshold: () => print("Threshold reached, you won!"),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black, width: 2),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(45),
-                    ),
-                  ),
-                  height: 250,
-                  width: 250,
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(Challanges.challangeList[widget.challangeIndex].days[widget.dayIndex],style: TextStyle(fontSize: 16,),textAlign: TextAlign.center,),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Row(
+      body: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  // ignore: deprecated_member_use
-                  child: RaisedButton(
-                    child: Row(
-                      children: [
-                        Text(
-                          "Paylaş",
+                Text("Bugünün Meydan Okumasını Görmek İçin Kazı",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                SizedBox(height: 5,),
+                Center(
+                  child: Scratcher(
+                    key: scratchKey,
+                    brushSize: 30,
+                    threshold: 0,
+                    //rebuildOnResize: true,
+                    color: Colors.red,
+                    onChange: (value) => print("Scratch progress: $value%"),
+                    onThreshold: () => print("Threshold reached, you won!"),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black, width: 2),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(45),
+                        ),
+                      ),
+                      height: 250,
+                      width: 250,
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(Challanges.challangeList[widget.challangeIndex].days[widget.dayIndex],style: TextStyle(fontSize: 16,),textAlign: TextAlign.center,),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      // ignore: deprecated_member_use
+                      child: RaisedButton(
+                        child: Row(
+                          children: [
+                            Text(
+                              "Paylaş",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Icon(Icons.share,color: Colors.white,),
+                          ],
+                          mainAxisAlignment: MainAxisAlignment.center,
+                        ),
+                        onPressed: () {
+                          debugPrint("Butona tıklandı");
+                        },
+                      color: Colors.deepOrangeAccent,),
+
+                    ),
+                    SizedBox(width: 10,),
+                    Expanded(
+                      // ignore: deprecated_member_use
+                      child: RaisedButton(
+                        child: Text(
+                          "Kazımayı Atla",
                           style: TextStyle(color: Colors.white),
                         ),
-                        Icon(Icons.share,color: Colors.white,),
-                      ],
-                      mainAxisAlignment: MainAxisAlignment.center,
+                        onPressed: () {
+                          scratchKey.currentState!.isFinished = true;
+                        },
+                      color: Colors.deepOrangeAccent,),
                     ),
-                    onPressed: () {
-                      debugPrint("Butona tıklandı");
-                    },
-                  color: Colors.deepOrangeAccent,),
 
+                  ],
                 ),
-                SizedBox(width: 10,),
-                Expanded(
-                  // ignore: deprecated_member_use
+                Visibility(
+                  visible: isFinish,
                   child: RaisedButton(
-                    child: Text(
-                      "Kazımayı Atla",
-                      style: TextStyle(color: Colors.white),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.attach_money,color: Colors.yellow,),
+                        Text(
+                          "Meydan Okuma Tamamlandı | 2 Puan",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
                     ),
                     onPressed: () {
                       scratchKey.currentState!.isFinished = true;
+                      setState(() {
+                        isFinish = false;
+                      });
                     },
-                  color: Colors.deepOrangeAccent,),
+                    color: Colors.deepOrangeAccent,),
                 ),
-
+                Visibility(
+                  visible: isFinishAd,
+                  child: RaisedButton(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.album_outlined,color: Colors.yellow,),
+                        Text(
+                          "Meydan Okuma Tamamlandı | 5 Puan",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                    onPressed: () {
+                      scratchKey.currentState!.isFinished = true;
+                      setState(() {
+                        isFinish = false;
+                        isFinishAd = false;
+                      });
+                    },
+                    color: Colors.deepOrangeAccent,),
+                ),
               ],
             ),
-            RaisedButton(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.attach_money,color: Colors.yellow,),
-                  Text(
-                    "Meydan Okuma Tamamlandı | 2 Puan",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
-              ),
-              onPressed: () {
-                scratchKey.currentState!.isFinished = true;
-              },
-              color: Colors.deepOrangeAccent,),
-            RaisedButton(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.album_outlined,color: Colors.yellow,),
-                  Text(
-                    "Meydan Okuma Tamamlandı | 5 Puan",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
-              ),
-              onPressed: () {
-                scratchKey.currentState!.isFinished = true;
-              },
-              color: Colors.deepOrangeAccent,),
-          ],
+          ),
         ),
       ),
     );
   }
 
   showAlertDialog(BuildContext context) {
-
+    TextEditingController textEditingController = new TextEditingController();
 
     // set up the buttons
     Widget cancelButton = ElevatedButton(
       child: Text("Kaydet"),
       onPressed:  () {
         Navigator.pop(context);
+        var note = textEditingController.text;
+
         debugPrint("$note");
       },
 
@@ -177,6 +198,7 @@ class _TaskDetailsState extends State<TaskDetails> {
       title: Container(child: Image.asset("assets/design_course/interFace3.png"),height: 80,),
       actions: [
         TextFormField(
+          controller: textEditingController,
           maxLines: 3,
           decoration: InputDecoration(
             labelText: 'Notunuzu Yazın',
@@ -189,7 +211,7 @@ class _TaskDetailsState extends State<TaskDetails> {
               return null;
             }
           },
-          onChanged: (value) => setState(() => note = value),
+          // onChanged: (value) => note = value),
         ),
         SizedBox(height: 5,),
         Row(

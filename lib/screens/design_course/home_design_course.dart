@@ -42,7 +42,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
                   child: Column(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4.0),
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: Center(
                             child: Text(
                           "When one door of happiness closes, another opens; but often we look so long at the closed door that we do not see the one which has been opened for us",
@@ -72,7 +72,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         CategoryListView(),
-        Text(
+       /* Text(
           'Kategoriler',
           textAlign: TextAlign.left,
           style: TextStyle(
@@ -84,8 +84,8 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
         ),
         const SizedBox(
           height: 4,
-        ),
-        Padding(
+        ),*/
+       /* Padding(
           padding: const EdgeInsets.only(left: 4, right: 4),
           child: Row(
             children: <Widget>[
@@ -107,7 +107,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
                   CategoryType.last, categoryType == CategoryType.last),
             ],
           ),
-        ),
+        ),*/
 
       ],
     );
@@ -120,8 +120,9 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          SizedBox(height: 10,),
           Text(
-            'Kategori Adı',
+            'Alışkanlıklar',
             textAlign: TextAlign.left,
             style: TextStyle(
               fontWeight: FontWeight.w600,

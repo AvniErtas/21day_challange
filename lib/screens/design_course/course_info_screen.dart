@@ -318,7 +318,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                 ),
               ),
             ),
-            Positioned(
+            /*Positioned(
               top: (MediaQuery.of(context).size.width / 1.63),
               right: 35,
               child: ScaleTransition(
@@ -343,7 +343,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                   ),
                 ),
               ),
-            ),
+            ),*/
             Padding(
               padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
               child: SizedBox(
