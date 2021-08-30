@@ -7,6 +7,7 @@ import 'package:flutter_app_21/screens/settingspage.dart';
 
 import 'fitness_app_theme.dart';
 import 'screens/design_course/home_design_course.dart';
+import 'tools/sharedPreferencesHelper.dart';
 
 
 /* //TODO
@@ -18,7 +19,9 @@ import 'screens/design_course/home_design_course.dart';
 *
  */
 
-void main() {
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPreferencesHelper.init();
   runApp(MainApp());
 }
 
