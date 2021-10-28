@@ -114,8 +114,8 @@ class CategoryView extends StatelessWidget {
                           child: Container(
                             decoration: BoxDecoration(
                               color: HexColor('#F8FAFB'),
-                              borderRadius: const BorderRadius.all(
-                                  Radius.circular(16.0)),
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(16.0)),
                               // border: new Border.all(
                               //     color: DesignCourseAppTheme.notWhite),
                             ),
@@ -132,8 +132,8 @@ class CategoryView extends StatelessWidget {
                                             fontWeight: FontWeight.w600,
                                             fontSize: 16,
                                             letterSpacing: 0.27,
-                                            color: DesignCourseAppTheme
-                                                .darkerText,
+                                            color:
+                                                DesignCourseAppTheme.darkerText,
                                           ),
                                         ),
                                         /*Padding(
@@ -217,8 +217,8 @@ class CategoryView extends StatelessWidget {
                               const BorderRadius.all(Radius.circular(16.0)),
                           boxShadow: <BoxShadow>[
                             BoxShadow(
-                                color: DesignCourseAppTheme.grey
-                                    .withOpacity(0.2),
+                                color:
+                                    DesignCourseAppTheme.grey.withOpacity(0.2),
                                 offset: const Offset(0.0, 0.0),
                                 blurRadius: 6.0),
                           ],
@@ -228,9 +228,7 @@ class CategoryView extends StatelessWidget {
                               const BorderRadius.all(Radius.circular(16.0)),
                           child: AspectRatio(
                               aspectRatio: 1.28,
-                              child: Hero(
-                                  tag: index.toString(),
-                                  child: Image.asset(challange.imagePath))),
+                              child: Image.asset(challange.imagePath)),
                         ),
                       ),
                     ),
@@ -245,13 +243,14 @@ class CategoryView extends StatelessWidget {
   }
 
   nextPage(BuildContext context, int index) {
-   /* Navigator.push<dynamic>(
+    /* Navigator.push<dynamic>(
       context,
       MaterialPageRoute<dynamic>(
         builder: (BuildContext context) => CourseInfoScreen(index),
       ),
     );*/
     Navigator.push(context, MaterialPageRoute(builder: (_) {
-      return CourseInfoScreen(index);  }));
+      return CourseInfoScreen(index);
+    }));
   }
 }

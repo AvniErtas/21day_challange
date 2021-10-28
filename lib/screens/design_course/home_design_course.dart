@@ -71,6 +71,19 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
+     Padding(
+       padding: const EdgeInsets.only(left: 4, right: 4),
+       child: Text(
+            'Kaldığın yerden devam et',
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 17,
+              letterSpacing: 0.27,
+              color: DesignCourseAppTheme.darkerText,
+            ),
+          ),
+     ),
         CategoryListView(),
        /* Text(
           'Kategoriler',

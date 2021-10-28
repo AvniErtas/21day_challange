@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_21/database/database.dart';
+import 'package:flutter_app_21/documents/challanges.dart';
+import 'package:flutter_app_21/entity/UserProgress.dart';
 import 'package:flutter_app_21/main.dart';
 import 'package:flutter_app_21/screens/design_course/design_course_app_theme.dart';
 import 'package:flutter_app_21/screens/design_course/models/category.dart';
@@ -23,9 +26,13 @@ class _CategoryListViewState extends State<CategoryListView>
     super.initState();
   }
 
-  Future<bool> getData() async {
-    await Future<dynamic>.delayed(const Duration(milliseconds: 50));
-    return true;
+  Future<List<UserProgress>> getProgressFromDB() async{
+    var database =
+        await $FloorAppDatabase.databaseBuilder('app_database.db').build();
+
+    final userProgressDao = database.userProgressDao;
+    final result = await userProgressDao.findAllUserProgress();
+    return result;
   }
 
   @override
@@ -37,34 +44,32 @@ class _CategoryListViewState extends State<CategoryListView>
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height*0.15,
+      height: MediaQuery.of(context).size.height*0.09,
       width: double.infinity,
-      child: FutureBuilder<bool>(
-        future: getData(),
-        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+      child: FutureBuilder<List<UserProgress>>(
+        future: getProgressFromDB(),
+        builder: (BuildContext context, AsyncSnapshot<List<UserProgress>> snapshot) {
           if (!snapshot.hasData) {
             return const SizedBox();
           } else {
             return ListView.builder(
               padding: const EdgeInsets.only(
                   top: 0, bottom: 0, right: 8, left: 8),
-              itemCount: Category.categoryList.length,
+              itemCount: snapshot.data!.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
-                final int count = Category.categoryList.length > 10
-                    ? 10
-                    : Category.categoryList.length;
+
                 final Animation<double> animation =
                     Tween<double>(begin: 0.0, end: 1.0).animate(
                         CurvedAnimation(
                             parent: animationController!,
-                            curve: Interval((1 / count) * index, 1.0,
+                            curve: Interval((1 / snapshot.data!.length) * index, 1.0,
                                 curve: Curves.fastOutSlowIn)));
                 animationController?.forward();
 
                 return CategoryView(
                   index: index,
-                  category: Category.categoryList[index],
+                  userProgress: snapshot.data![index],
                   animation: animation,
                   animationController: animationController,
                 );
@@ -81,13 +86,12 @@ class CategoryView extends StatelessWidget {
   const CategoryView(
       {Key? key,
       required this.index,
-      this.category,
       this.animationController,
-      this.animation})
+      this.animation, this.userProgress})
       : super(key: key);
 
   final int index;
-  final Category? category;
+  final UserProgress? userProgress;
   final AnimationController? animationController;
   final Animation<double>? animation;
 
@@ -117,7 +121,7 @@ class CategoryView extends StatelessWidget {
                           Expanded(
                             child: Container(
                               decoration: BoxDecoration(
-                                color: HexColor('#DEE8E4'),
+                                color: HexColor('#17000000'),
                                 borderRadius: const BorderRadius.all(
                                     Radius.circular(16.0)),
                               ),
@@ -132,7 +136,7 @@ class CategoryView extends StatelessWidget {
                                         children: <Widget>[
                                           Spacer(),
                                           Text(
-                                            category!.title,
+                                            Challanges.challangeList[userProgress!.id].challangesName,
                                             textAlign: TextAlign.left,
                                             style: TextStyle(
                                               fontWeight: FontWeight.w600,
@@ -157,7 +161,7 @@ class CategoryView extends StatelessWidget {
                                                   CrossAxisAlignment.center,
                                               children: <Widget>[
                                                 Text(
-                                                  '2 / ${category!.lessonCount}',
+                                                  '${userProgress!.lastDay} / ${Challanges.challangeList[userProgress!.id].days.length}',
                                                   textAlign: TextAlign.left,
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w200,
@@ -171,7 +175,7 @@ class CategoryView extends StatelessWidget {
                                                   child: Row(
                                                     children: <Widget>[
                                                       Text(
-                                                        '%${category!.rating}',
+                                                        '%${tamamlanmaYuzdesiHesapla(userProgress!.lastDay,Challanges.challangeList[userProgress!.id].days.length)}',
                                                         textAlign:
                                                             TextAlign.left,
                                                         style: TextStyle(
@@ -198,51 +202,6 @@ class CategoryView extends StatelessWidget {
                                             ),
                                           ),
                                           Spacer(),
-                                          /*Padding(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 16, right: 16),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                Text(
-                                                  '\$${category!.money}',
-                                                  textAlign: TextAlign.left,
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w600,
-                                                    fontSize: 18,
-                                                    letterSpacing: 0.27,
-                                                    color: DesignCourseAppTheme
-                                                        .nearlyBlue,
-                                                  ),
-                                                ),
-                                                Container(
-                                                  decoration: BoxDecoration(
-                                                    color: DesignCourseAppTheme
-                                                        .nearlyBlue,
-                                                    borderRadius:
-                                                        const BorderRadius.all(
-                                                            Radius.circular(
-                                                                8.0)),
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            4.0),
-                                                    child: Icon(
-                                                      Icons.add,
-                                                      color:
-                                                          DesignCourseAppTheme
-                                                              .nearlyWhite,
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
-                                            ),
-                                          ),*/
                                         ],
                                       ),
                                     ),
@@ -262,10 +221,10 @@ class CategoryView extends StatelessWidget {
                           children: <Widget>[
                             ClipRRect(
                               borderRadius:
-                                  const BorderRadius.all(Radius.circular(16.0)),
+                                  const BorderRadius.all(Radius.circular(96.0)),
                               child: AspectRatio(
-                                  aspectRatio: 0.7,
-                                  child: Image.asset(category!.imagePath)),
+                                  aspectRatio: 0.8,
+                                  child: Image.asset(Challanges.challangeList[userProgress!.id].imagePath)),
                             )
                           ],
                         ),
@@ -279,6 +238,10 @@ class CategoryView extends StatelessWidget {
         );
       },
     );
+  }
+
+  int tamamlanmaYuzdesiHesapla(int lastDay,int totalDay) {
+    return lastDay*100~/totalDay;
   }
 
   nextPage(BuildContext context, int index) {

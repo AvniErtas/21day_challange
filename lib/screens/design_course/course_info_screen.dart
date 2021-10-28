@@ -19,9 +19,9 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
   final double infoHeight = 364.0;
   AnimationController? animationController;
   Animation<double>? animation;
-  double opacity1 = 0.0;
-  double opacity2 = 0.0;
-  double opacity3 = 0.0;
+  double opacity1 = 1.0;
+  double opacity2 = 1.0;
+  double opacity3 = 1.0;
   @override
   void initState() {
     animationController = AnimationController(
@@ -35,18 +35,6 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
 
   Future<void> setData() async {
     animationController?.forward();
-    await Future<dynamic>.delayed(const Duration(milliseconds: 200));
-    setState(() {
-      opacity1 = 1.0;
-    });
-    await Future<dynamic>.delayed(const Duration(milliseconds: 200));
-    setState(() {
-      opacity2 = 1.0;
-    });
-    await Future<dynamic>.delayed(const Duration(milliseconds: 200));
-    setState(() {
-      opacity3 = 1.0;
-    });
   }
 
   void _showAction(BuildContext context, int index) {
@@ -75,7 +63,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
       future: getLastDayFromDb(),
       builder: (BuildContext context, AsyncSnapshot<int> snapshot) {  // AsyncSnapshot<Your object type>
         if( snapshot.connectionState == ConnectionState.waiting){
-          return  Center(child: Text('Please wait its loading...'));
+          return  CircularProgressIndicator();
         }else{
           if (snapshot.hasError)
             return Center(child: Text('Error: ${snapshot.error}'));
@@ -90,10 +78,8 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                       children: <Widget>[
                         AspectRatio(
                           aspectRatio: 1.2,
-                          child: Hero(
-                              tag: widget.index,
-                              child: Image.asset(
-                                  Challanges.challangeList[widget.index].imagePath)),
+                          child: Image.asset(
+                              Challanges.challangeList[widget.index].imagePath),
                         ),
                       ],
                     ),
@@ -142,61 +128,6 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                       ),
                                     ),
                                   ),
-                                  /*  Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 16, right: 16, bottom: 8, top: 16),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Text(
-                                    '\$28.99',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w200,
-                                      fontSize: 22,
-                                      letterSpacing: 0.27,
-                                      color: DesignCourseAppTheme.nearlyBlue,
-                                    ),
-                                  ),
-                                  Container(
-                                    child: Row(
-                                      children: <Widget>[
-                                        Text(
-                                          '4.3',
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w200,
-                                            fontSize: 22,
-                                            letterSpacing: 0.27,
-                                            color: DesignCourseAppTheme.grey,
-                                          ),
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: DesignCourseAppTheme.nearlyBlue,
-                                          size: 24,
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),*/
-                                  /*AnimatedOpacity(
-                              duration: const Duration(milliseconds: 500),
-                              opacity: opacity1,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8),
-                                child: Row(
-                                  children: <Widget>[
-                                    getTimeBoxUI('21', 'Gün'),
-                                    getTimeBoxUI('2hours', 'Time'),
-                                    getTimeBoxUI('24', 'Seat'),
-                                  ],
-                                ),
-                              ),
-                            ),*/
                                   AnimatedOpacity(
                                     duration: const Duration(milliseconds: 500),
                                     opacity: opacity2,
@@ -425,8 +356,13 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
       AnimationController? animationController, Animation<double> animation) {
     return InkWell(
       onTap: () {
+        if((index+1) <= lastDay)
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => TaskDetails(index,widget.index)));
+            MaterialPageRoute(builder: (context) => TaskDetails(index+1,widget.index,lastDay)));
+        else {
+          final snackBar = SnackBar(content: Text('Bu günü açmak için diğerlerini tamamlamalısınız.'),backgroundColor: Colors.red,);
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        }
       },
       child: AnimatedBuilder(
           animation: animationController!,
@@ -450,7 +386,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                             blurRadius: 8.0),
                       ],
                     ),
-                    child: Column(
+                    child: (index+1) <= lastDay ? Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
@@ -475,6 +411,12 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                           ),
                         ),
                       ],
+                    ) : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(Icons.lock_outline)
+                      ],
                     ),
                   ),
                 ),
@@ -489,6 +431,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
     final userProgressDao = database.userProgressDao;
     final result = userProgressDao.findUserProgressById(widget.index);
     var lastDay = 1;
+    if(await result.first!=null)
     await result.first.then((value) => lastDay = value!.lastDay);
     return lastDay;
   }
