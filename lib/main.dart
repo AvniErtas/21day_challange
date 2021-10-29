@@ -10,14 +10,10 @@ import 'screens/design_course/home_design_course.dart';
 import 'tools/sharedPreferencesHelper.dart';
 
 
-/* //TODO
-* İconlar belirlenecek
-İyi günler,geceler,günaydın yazısı hazırlanacak
-* EKsik datalar tamamlanacak
-* Ayarlar sayfası oluşturulacak
-*Kazımayı atla butonu düzeltilecek
-*
- */
+/// ANASAYFADA Alışkanlıklar bölümünün tamamı çıkmıyor
+/// Yan menüde profil,iletişim,gizlilik politikası kalsın
+/// Eksik içerikleri tamamla (resim ve yazı)
+/// Kendi meydan okuma sayfası içinde yeni kategori oluşturma
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
