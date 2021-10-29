@@ -171,78 +171,6 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                           crossAxisCount: 5, crossAxisSpacing: 2),
                                     ),
                                   ),
-                                  /* AnimatedOpacity(
-                              duration: const Duration(milliseconds: 500),
-                              opacity: opacity3,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 16, bottom: 0, right: 16),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: <Widget>[
-                                    Container(
-                                      width: 48,
-                                      height: 48,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: DesignCourseAppTheme.nearlyWhite,
-                                          borderRadius: const BorderRadius.all(
-                                            Radius.circular(16.0),
-                                          ),
-                                          border: Border.all(
-                                              color: DesignCourseAppTheme.grey
-                                                  .withOpacity(0.2)),
-                                        ),
-                                        child: Icon(
-                                          Icons.add,
-                                          color: DesignCourseAppTheme.nearlyBlue,
-                                          size: 28,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 16,
-                                    ),
-                                    Expanded(
-                                      child: Container(
-                                        height: 48,
-                                        decoration: BoxDecoration(
-                                          color: DesignCourseAppTheme.nearlyBlue,
-                                          borderRadius: const BorderRadius.all(
-                                            Radius.circular(16.0),
-                                          ),
-                                          boxShadow: <BoxShadow>[
-                                            BoxShadow(
-                                                color: DesignCourseAppTheme
-                                                    .nearlyBlue
-                                                    .withOpacity(0.5),
-                                                offset: const Offset(1.1, 1.1),
-                                                blurRadius: 10.0),
-                                          ],
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            'Join Course',
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 18,
-                                              letterSpacing: 0.0,
-                                              color: DesignCourseAppTheme
-                                                  .nearlyWhite,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),*/
-                                  /*SizedBox(
-                              height: MediaQuery.of(context).padding.bottom,
-                            )*/
                                 ],
                               ),
                             ),
@@ -250,32 +178,6 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                         ),
                       ),
                     ),
-                    /*Positioned(
-                top: (MediaQuery.of(context).size.width / 1.63),
-                right: 35,
-                child: ScaleTransition(
-                  alignment: Alignment.center,
-                  scale: CurvedAnimation(
-                      parent: animationController!, curve: Curves.fastOutSlowIn),
-                  child: Card(
-                    color: DesignCourseAppTheme.nearlyBlue,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50.0)),
-                    elevation: 10.0,
-                    child: Container(
-                      width: 60,
-                      height: 60,
-                      child: Center(
-                        child: Icon(
-                          Icons.favorite,
-                          color: DesignCourseAppTheme.nearlyWhite,
-                          size: 30,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),*/
                     Padding(
                       padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
                       child: SizedBox(
@@ -303,7 +205,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                   distance: 112.0,
                   children: [
                     FloatingActionButton.extended(
-                      onPressed: () => _showAction(context, 0),
+                      onPressed: () => _yenidenBaslat(),
                       icon: const Icon(Icons.refresh),
                       label: Text(
                         "Yeniden Başlat",
@@ -434,5 +336,39 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
     if(await result.first!=null)
     await result.first.then((value) => lastDay = value!.lastDay);
     return lastDay;
+  }
+
+  void _yenidenBaslat() async {
+    var database =
+        await $FloorAppDatabase.databaseBuilder('app_database.db').build();
+
+    final userProgressDao = database.userProgressDao;
+    final result = userProgressDao.findUserProgressById(widget.index);
+    if (await result.first == null) {
+      _showSnackbarFail();
+    } else {
+      result.first.then((value) => {
+        value!.lastDay = 1,
+        userProgressDao.updateUserProgress(value),
+      });
+      setState(() {
+        _showSnackbarSuccess();
+      });
+    }
+  }
+
+  void _showSnackbarSuccess() {
+    final snackBar = SnackBar(
+      content: Text('Yeniden başlatıldı'),
+      backgroundColor: Colors.green,
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+  void _showSnackbarFail() {
+    final snackBar = SnackBar(
+      content: Text('Zaten başlamamışsınız!'),
+      backgroundColor: Colors.red,
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

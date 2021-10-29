@@ -66,9 +66,9 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
               ),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                mainAxisSpacing: 16.0,
-                crossAxisSpacing: 16.0,
-                childAspectRatio: 1.5,
+                mainAxisSpacing: 14.0,
+                crossAxisSpacing: 24.0,
+                childAspectRatio: 1.6,
               ),
             );
           }

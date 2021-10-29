@@ -25,7 +25,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8),
+      padding: EdgeInsets.only(left: 8,right: 8,bottom: 54),
       color: DesignCourseAppTheme.nearlyWhite,
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -36,27 +36,25 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
             ),
             getAppBarUI(),
             Expanded(
-              child: SingleChildScrollView(
-                child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Center(
-                            child: Text(
-                          "When one door of happiness closes, another opens; but often we look so long at the closed door that we do not see the one which has been opened for us",
-                          style: TextStyle(fontSize: 12),
-                          textAlign: TextAlign.center,
-                        )),
-                      ),
-                      //getSearchBarUI(),
-                      getCategoryUI(),
-                      Flexible(
-                        child: getPopularCourseUI(),
-                      ),
-                    ],
-                  ),
+              child: Container(
+                height: MediaQuery.of(context).size.height,
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Center(
+                          child: Text(
+                        "When one door of happiness closes, another opens; but often we look so long at the closed door that we do not see the one which has been opened for us",
+                        style: TextStyle(fontSize: 12),
+                        textAlign: TextAlign.center,
+                      )),
+                    ),
+                    //getSearchBarUI(),
+                    getCategoryUI(),
+                    Flexible(
+                      child: getPopularCourseUI(),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -85,42 +83,6 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
           ),
      ),
         CategoryListView(),
-       /* Text(
-          'Kategoriler',
-          textAlign: TextAlign.left,
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 19,
-            letterSpacing: 0.27,
-            color: DesignCourseAppTheme.darkerText,
-          ),
-        ),
-        const SizedBox(
-          height: 4,
-        ),*/
-       /* Padding(
-          padding: const EdgeInsets.only(left: 4, right: 4),
-          child: Row(
-            children: <Widget>[
-              getButtonUI(CategoryType.first, categoryType == CategoryType.first),
-              const SizedBox(
-                width: 4,
-              ),
-              getButtonUI(
-                  CategoryType.second, categoryType == CategoryType.second),
-              const SizedBox(
-                width: 4,
-              ),
-              getButtonUI(
-                  CategoryType.third, categoryType == CategoryType.third),
-              const SizedBox(
-                width: 4,
-              ),
-              getButtonUI(
-                  CategoryType.last, categoryType == CategoryType.last),
-            ],
-          ),
-        ),*/
 
       ],
     );

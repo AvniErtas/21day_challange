@@ -31,9 +31,10 @@ class _TaskDetailsState extends State<TaskDetails> {
       isFinish = false;
       isFinishAd = false;
     }
+    coin = SharedPreferencesHelper.getInteger('coin');
     super.initState();
   }
-
+  var coin;
   var isFinish = true;
   var isFinishAd = true;
   final scratchKey = GlobalKey<ScratcherState>();
@@ -63,7 +64,7 @@ class _TaskDetailsState extends State<TaskDetails> {
             padding: const EdgeInsets.only(right: 20),
             child: Center(
                 child: Text(
-              SharedPreferencesHelper.getInteger('coin').toString(),
+              coin.toString(),
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             )),
           ),
@@ -184,6 +185,7 @@ class _TaskDetailsState extends State<TaskDetails> {
                       scratchKey.currentState!.isFinished = true;
                       setState(() {
                         isFinish = false;
+                        coin+=2;
                       });
                       _meydanOkumaTamamlandi();
                     },
@@ -211,6 +213,7 @@ class _TaskDetailsState extends State<TaskDetails> {
                       setState(() {
                         isFinish = false;
                         isFinishAd = false;
+                        coin+=5;
                       });
                       _meydanOkumaTamamlandiAd();
                     },

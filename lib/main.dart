@@ -1,5 +1,6 @@
 import 'package:animated_drawer/views/animated_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_app_21/screens/bottom_bar_view.dart';
 import 'package:flutter_app_21/screens/design_course/models/tabIcon_data.dart';
 import 'package:flutter_app_21/screens/profilepage.dart';
@@ -40,7 +41,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with TickerProviderStateMixin {
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
   AnimationController? animationController;
-
+  var coin;
   Widget tabBody = Container(
     color: FitnessAppTheme.background,
   );
@@ -55,6 +56,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
     animationController = AnimationController(
         duration: const Duration(milliseconds: 600), vsync: this);
     tabBody = DesignCourseHomeScreen(animationController: animationController);
+    coin = SharedPreferencesHelper.getInteger('coin');
     super.initState();
   }
 
@@ -246,11 +248,12 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
       homePageContent: Stack(children: [
         DesignCourseHomeScreen(),
         Padding(
-          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.05,right: 10),
+          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.07,right: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Icon(Icons.attach_money,color: Colors.green,),
+              Text(coin.toString())
             ],
           ),
         ),
