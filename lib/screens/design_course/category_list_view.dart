@@ -50,8 +50,11 @@ class _CategoryListViewState extends State<CategoryListView>
         future: getProgressFromDB(),
         builder: (BuildContext context, AsyncSnapshot<List<UserProgress>> snapshot) {
           if (!snapshot.hasData) {
-            return const SizedBox();
+            return const SizedBox(child: Center(child: Text('Henüz başladığınız bir alışkanlık bulunmamaktadır.')),);
           } else {
+            if(snapshot.data!.isEmpty) {
+              return const SizedBox(child: Center(child: Text('Henüz başladığınız bir alışkanlık bulunmamaktadır.')),);
+            }
             return ListView.builder(
               padding: const EdgeInsets.only(
                   top: 0, bottom: 0, right: 8, left: 8),

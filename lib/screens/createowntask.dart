@@ -12,16 +12,26 @@ class _CreateOwnTaskState extends State<CreateOwnTask> {
 
   late String taskname;
   late String taskexp;
+
   List tasks = [];
-  List<TextEditingController> _gunController = List.generate(21, (i) => TextEditingController());
+
+  List<TextEditingController> _gunController =
+      List.generate(21, (i) => TextEditingController());
+
+  TextEditingController _tasknamecontroller = TextEditingController();
+  TextEditingController _taskExpcontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(onPressed: (){
-      },
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          saveChallange();
+        },
         backgroundColor: Colors.deepOrangeAccent,
-      child: Icon(Icons.add,),
+        child: Icon(
+          Icons.add,
+        ),
       ),
       appBar: AppBar(
         title: Text("Kendi Meydan Okumanı Oluştur"),
@@ -82,7 +92,8 @@ class _CreateOwnTaskState extends State<CreateOwnTask> {
             return null;
           }
         },
-        onChanged: (value) => setState(() => taskname = value),
+        controller: _tasknamecontroller,
+        //onChanged: (value) => setState(() => taskname = value),
       );
 
   Widget taskExplanation(index) => TextFormField(
@@ -98,14 +109,15 @@ class _CreateOwnTaskState extends State<CreateOwnTask> {
             return null;
           }
         },
-        onChanged: (value) => setState(() => taskexp = value),
+        //onChanged: (value) => setState(() => taskexp = value),
+     controller: _taskExpcontroller,
       );
 
   Widget taskslist(index) => Row(
-    children: [
-      Icon(Icons.calendar_today),
-      Expanded(
-        child: TextFormField(
+        children: [
+          Icon(Icons.calendar_today),
+          Expanded(
+            child: TextFormField(
               maxLines: 1,
               controller: _gunController[index],
               decoration: InputDecoration(
@@ -119,9 +131,19 @@ class _CreateOwnTaskState extends State<CreateOwnTask> {
                   return null;
                 }
               },
-              onChanged: (value) => setState(() => tasks[index] = value),
+              // onChanged: (value) => setState(() => tasks[index] = value),
             ),
-      ),
-    ],
-  );
+          ),
+        ],
+      );
+
+  void saveChallange() {
+
+    var baslik = _tasknamecontroller.value.text;
+    var aciklama = _taskExpcontroller.value.text;
+
+
+
+
+  }
 }
