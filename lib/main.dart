@@ -12,7 +12,6 @@ import 'screens/design_course/home_design_course.dart';
 import 'tools/sharedPreferencesHelper.dart';
 
 
-/// ANASAYFADA Alışkanlıklar bölümünün tamamı çıkmıyor
 /// Yan menüde profil,iletişim,gizlilik politikası kalsın
 /// Eksik içerikleri tamamla (resim ve yazı)
 /// Kendi meydan okuma sayfası içinde yeni kategori oluşturma
@@ -27,8 +26,8 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: WelcomePage(),
-
+      home: //WelcomePage(),
+       Home(),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -153,10 +152,10 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     ),
                   ],
                 ),
-                Padding(
+                /*   Padding(
                   padding: EdgeInsets.only(bottom: 20),
                 ),
-                Row(
+               Row(
                   children: [
                     Icon(Icons.attach_money),
                     SizedBox(width: 3,),
@@ -167,7 +166,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       ),
                     ),
                   ],
-                ),
+                ),*/
                 Padding(
                   padding: EdgeInsets.only(bottom: 20),
                 ),
@@ -225,7 +224,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     ),
                   ],
                 ),
-                Padding(
+                /*Padding(
                   padding: EdgeInsets.only(bottom: 20),
                 ),
                 Row(
@@ -239,7 +238,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       ),
                     ),
                   ],
-                ),
+                ),*/
 
               ],
             ),

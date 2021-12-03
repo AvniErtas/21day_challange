@@ -5,7 +5,7 @@ class Challanges {
     Challange(
         challangesName: "Gece Rutini",
         description: "Bu mücadelede , daha iyi bir gece uykusu çekmek ve yatma vaktinde daha az stresli hissetmek için bazı ipuçları bulacaksınız.",
-        imagePath: "assets/design_course/interFace1.png",
+        imagePath: "assets/design_course/gecerutini.jpg",
         days: [
           "Günü düşünün,oldukça iyi giden en az bir şeyi yazın.",
           "Rahatlatıcı bir şeyler yapın. Yüz maskesi al , biraz resim yap , banyo yap , rahatlamanıza yardımcı olan şeyler yapın.",
@@ -33,7 +33,7 @@ class Challanges {
         challangesName: "Günlük Tutma",
         description:
             "Günlük tutma alışkanlığınızı geliştirmeye başlamanıza yardımcı olacak 21 günlük ipuçları.",
-        imagePath: "assets/design_course/interFace1.png",
+        imagePath: "assets/design_course/gunluktutma.jpg",
         days: [
           "Kendinizle gurur duyduğunuz bir zamanı yazın",
           "Bu yıl için 3 dileğin olsaydı ne dilerdin ?",
@@ -61,7 +61,7 @@ class Challanges {
         challangesName: "İyimserlik mücadelesi",
         description:
             "iyimserlik, pozitif bir tavra sahip olmayı seçerek hayatınızı yaşamak üzerine bilinçli bir karardır. Olayların olumlu taraflarını görebilmek , canlandırır ve umut verir.",
-        imagePath: "assets/design_course/interFace1.png",
+        imagePath: "assets/design_course/iyimserlik.jpg",
         days: [
           "Günü düşünün.Oldukça iyi giden en az bir şeyi yazın.",
           "Sahip olduklarını takdir et / şükret. Sevdiklerine onları ne kadar sevdiğini söyle",
@@ -88,7 +88,7 @@ class Challanges {
     Challange(
         challangesName: "Öz Bakım",
         description: "İşte evde iken kendin için yapabileceğin tam 21 şey.",
-        imagePath: "assets/design_course/interFace1.png",
+        imagePath: "assets/design_course/ozbakim.jpg",
         days: [
           "En sevdiğin TV dizisini izle.",
           "Günlük tut ve duygularını , deneyimlerini kaydet.",
@@ -116,7 +116,7 @@ class Challanges {
         challangesName: "Düzenli olmak",
         description:
             "Unutma ki dağınıklıktan kurtulmak , organize olmanın ilk adımıdır.",
-        imagePath: "assets/design_course/interFace1.png",
+        imagePath: "assets/design_course/duzenliolmak.jpg",
         days: [
           "Dolabını temizle.",
           "Kitaplarını düzenle.",
@@ -144,7 +144,7 @@ class Challanges {
         challangesName: "Yemek Pişirme",
         description:
             "Yemek yapmaktan keyif alıyor musunuz ? O zaman bu sizin için ideal bir egzersizdir. Burada yemeklerinizi çeşitlendirmek için 21 eğlenceli fikir bulacaksınız.",
-        imagePath: "assets/design_course/interFace1.png",
+        imagePath: "assets/design_course/yemek_pisirme.jpg",
         days: [
           "Yeni bir yemek tarifi deneyelim.",
           "Bir TV programı veya filmden esinlenerek bir atıştırmalık/yemek hazırla",
@@ -172,7 +172,7 @@ class Challanges {
         challangesName: "Kendinizi şımartın",
         description:
             "İşte kendinizi yenilemek ve içinizdeki cevheri açığa çıkarmak için günlük hayatınızda uygulayabileceğiniz 21 kişisel bakım önerisi",
-        imagePath: "assets/design_course/interFace1.png",
+        imagePath: "assets/design_course/kendinisimart.jpg",
         days: [
           "Bir mum yakın, rahatlatıcı yavaş bir müzik açın ve güzel bir banyo yapın.",
           "Açık havada oturun , gün batımı veya gün doğumunu izlemek ve temiz bir hava almak size çok iyi gelecek.",
@@ -200,7 +200,7 @@ class Challanges {
         challangesName: "İyilik",
         description:
             "Her şeyin her an olabileceği bir dünyada nazik biri olun. Burada her gün yaşamınıza katabileceğiniz 21 nezaket eylemi bulacaksınız.",
-        imagePath: "assets/design_course/interFace1.png",
+        imagePath: "assets/design_course/iyilik.jpg",
         days: [
           "Bugün birine desteğinizi gösterin.",
           "Hayatınızda etkisi olan birine teşekkür notu yazın.",
@@ -228,7 +228,7 @@ class Challanges {
         challangesName: "Olumlu ifadeler",
         description:
             "Olumlu ifadeler kullanmak , kendinizi daha güvende hissetmenize ve olumlu hisleri arttırmanıza yardımcı olabilir. Güne başlamanın harika bir yolu olumlu düşünmektir.",
-        imagePath: "assets/design_course/interFace1.png",
+        imagePath: "assets/design_course/olumluifadeler.jpg",
         days: [
           "İçin de dışın da ayrı güzel , bunu sakın unutma.",
           "Duyguları göstermek sağlıklı ve iyidir.",
@@ -256,7 +256,7 @@ class Challanges {
         challangesName: "Evde egzersiz/eksik",
         description:
             "Acele etmeyin , 21 gün boyunca evinizde yapacağınız egzersiz planınız hazır !",
-        imagePath: "assets/design_course/interFace1.png",
+        imagePath: "assets/design_course/evde_egzersiz.jpg",
         days: [
           "İlk olarak 10 dk ısının ve 20 squat , 10 şınav , 30 saniye plank yapın.",
           "15 squat , 15 diz çekme , 20x4 ip atlama , 20 saniye duvarda oturma pozisyonu alın",
@@ -284,7 +284,7 @@ class Challanges {
         challangesName: "Verimlilik",
         description:
             "Bu mücadele sizi 21 gün boyunca her gün uygulamanız için tek bir verimlilik görevine teşvik edecek.",
-        imagePath: "assets/design_course/interFace1.png",
+        imagePath: "assets/design_course/verimlilik.jpg",
         days: [
           "Uyandıktan sonra yatağınızı yapın , böylece yatağa geri dönmek cazip bir durum olmayacak.",
           "Güzel , sağlıklı ve enerjik bir kahvaltı yapın.",
@@ -312,7 +312,7 @@ class Challanges {
         challangesName: "Abur cubura son",
         description:
             "Sağlıklı bir yaşam tarzı için küçük adımlarla başlayın ve bu 21 gün boyunca tüm abur cuburlardan kurtulun.",
-        imagePath: "assets/design_course/interFace1.png",
+        imagePath: "assets/design_course/aburcuburson.jpg",
         days: [
           "Bugün yemeklerinize daha fazla sebze eklemeye çalışın.",
           "Bugün çikolata yemeyin ve enerji elde etmek için fındık tercih edin.",
@@ -340,7 +340,7 @@ class Challanges {
         challangesName: "Sosyal Medya Detoksu",
         description:
             "Bu 21 küçük adım , internetten kopmanın ne kadar güzel olduğunu farketmenizi sağlayacak.",
-        imagePath: "assets/design_course/interFace1.png",
+        imagePath: "assets/design_course/sosyal_medya_detoksu.jpg",
         days: [
           "Bugün için 1 saatlik sosyal medya izni",
           "18.00'e kadar Instagram yok",
@@ -368,7 +368,7 @@ class Challanges {
         challangesName: "Pozitif Düşünme",
         description:
             "Düşünme şeklinizi değiştirmek, hayatınızda istediğiniz sonuçları elde etmenin anahtarı olabilir. Düşüncelerinize nasıl hakim olacağınızı öğrenirseniz , tüm dünyanız değişir.",
-        imagePath: "assets/design_course/interFace1.png",
+        imagePath: "assets/design_course/pozitifdusunme.jpg",
         days: [
           "Bugün gülümsemeyi dene , yabancılara gülümse , aynanın karşısında ve fırsat bulduğun her yerde gülümse. Kendini çok daha mutlu hissedeceksin.",
           "Bugün küçük şeylerin tadını çıkar.Birinin gülümsemesi , gün batımı , sabah kahven , güneşin sıcaklığı , gökyüzü..",
@@ -396,7 +396,7 @@ class Challanges {
         challangesName: "Sabah Rutini",
         description:
             "Bu bölümde , güne doğru bir başlangıç yapmanıza yardımcı olacak 21 sabah alışkanlığını paylaşacağız.",
-        imagePath: "assets/design_course/interFace1.png",
+        imagePath: "assets/design_course/sabahrutini.jpeg",
         days: [
           "Sabahları kendini iyi hissetmek için en sevdiğin müzik listesini dinle.",
           "Güzelce vücudunu esnet ve güneşin tenine dokunmasına izin ver.",
@@ -424,7 +424,7 @@ class Challanges {
         challangesName: "Yeni Yıl , Yeni Siz",
         description:
             "Önümüzdeki birkaç ay güzel bir dönüşüm dönemi olsun. Yeni başlangıçların sihrine güvenin.",
-        imagePath: "assets/design_course/interFace1.png",
+        imagePath: "assets/design_course/yeni_yil_yeni_siz.jpg",
         days: [
           "Olumlu bir sözün çıktısını alın ve cüzdanınıza veya aynanıza koyun, böylece her gün görebilirsiniz.",
           "İnsanlara sizin için ne kadar önemli olduklarını söyleyin.",
@@ -452,7 +452,7 @@ class Challanges {
         challangesName: "Güven",
         description:
             "Güven , sizin yarattığınız bir şeydir. Her şeyi başarabileceğinize dair bir kesinlik hissidir. Burada kendinize daha fazla güvenmenin 21 yolunu bulacaksınız.",
-        imagePath: "assets/design_course/interFace1.png",
+        imagePath: "assets/design_course/guven.jpg",
         days: [
           "Kendinizi güvensiz hissetmenize neden olan tüm sosyal medya hesaplarını takip etmeyi bırakın.",
           "Bugün ve bundan böyle iltifatları reddetmek yerine onları kabul etmeye çalışın.",
@@ -480,7 +480,7 @@ class Challanges {
         challangesName: "Çiftler için Alışkanlıklar",
         description:
             "Kelimeler olmadan 'Seni Seviyorum' demenin 21 yolu. Bu meydan okumalar , sağlam bir ilişki kurmanıza ve sevgilinize karşı daha sevecen , nazik ve düşünceli olmanıza yardımcı olacaktır.",
-        imagePath: "assets/design_course/interFace1.png",
+        imagePath: "assets/design_course/ciftler_icin_aliskanliklar.jpg",
         days: [
           "Partnerinizle ilgili sevdiğiniz şeylerin bir listesini yapın.",
           "Sürpriz bir buluşma gecesi planlayın.",
@@ -507,7 +507,7 @@ class Challanges {
     Challange(
         challangesName: "Çalışma Zorluğu",
         description: "Stres gerçektir, ertelemek de öyledir. 21 gün içinde nasıl etkili bir şekilde çalışacağınız öğrenmeye hazır mısınız ? ",
-        imagePath: "assets/design_course/interFace1.png",
+        imagePath: "assets/design_course/calisma_zorlugu.jpg",
         days: [
           "Bir program yapın ve her zaman not alın.",
           "Notlarınızı elle yazın ve anahtar kelimelerinizi işaretleyin.",
@@ -534,7 +534,7 @@ class Challanges {
     Challange(
         challangesName: "Zihin Sağlığı",
         description: "Kendinize zaman ayırmak , beden ve ruhunuzu dinlemek sağlığınız için çok önemlidir. Lisanslı terapistler lmasak da , sağlıklı bir zihin gelişimi için işte size birkaç ipucu",
-        imagePath: "assets/design_course/interFace1.png",
+        imagePath: "assets/design_course/zihin_sagligi.jpg",
         days: [
           "Olumsuz paylaşımlar yapan sosyal medya hesaplarını hemen takipten çıkarın. Eğlendiren,eğitici olan hesapları takibe al.",
           "Uyumadan önce , gün boyunca hoşunuza giden 3 şeyi yazın.",
