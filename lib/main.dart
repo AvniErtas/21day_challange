@@ -5,6 +5,7 @@ import 'package:flutter_app_21/screens/bottom_bar_view.dart';
 import 'package:flutter_app_21/screens/design_course/models/tabIcon_data.dart';
 import 'package:flutter_app_21/screens/profilepage.dart';
 import 'package:flutter_app_21/screens/settingspage.dart';
+import 'package:flutter_app_21/screens/welcomePage.dart';
 
 import 'fitness_app_theme.dart';
 import 'screens/design_course/home_design_course.dart';
@@ -26,7 +27,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Home(),
+      home: WelcomePage(),
 
       debugShowCheckedModeBanner: false,
     );

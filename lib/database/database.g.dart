@@ -6,6 +6,7 @@ part of 'database.dart';
 // FloorGenerator
 // **************************************************************************
 
+// ignore: avoid_classes_with_only_static_members
 class $FloorAppDatabase {
   /// Creates a database builder for a persistent database.
   /// Once a database is built, you should keep a reference to it and re-use it.
@@ -64,6 +65,8 @@ class _$AppDatabase extends AppDatabase {
 
   ChallangeNoteDao? _challangeNoteDaoInstance;
 
+  OwnTaskDao? _ownTaskDaoInstance;
+
   Future<sqflite.Database> open(String path, List<Migration> migrations,
       [Callback? callback]) async {
     final databaseOptions = sqflite.OpenDatabaseOptions(
@@ -86,6 +89,8 @@ class _$AppDatabase extends AppDatabase {
             'CREATE TABLE IF NOT EXISTS `UserProgress` (`id` INTEGER NOT NULL, `lastDay` INTEGER NOT NULL, PRIMARY KEY (`id`))');
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `ChallangeNote` (`id` INTEGER NOT NULL, `dayId` INTEGER NOT NULL, `note` TEXT NOT NULL, PRIMARY KEY (`id`))');
+        await database.execute(
+            'CREATE TABLE IF NOT EXISTS `OwnTask` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `baslik` TEXT NOT NULL, `aciklama` TEXT NOT NULL, `gunler` TEXT NOT NULL)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -103,6 +108,11 @@ class _$AppDatabase extends AppDatabase {
   ChallangeNoteDao get challangeNoteDao {
     return _challangeNoteDaoInstance ??=
         _$ChallangeNoteDao(database, changeListener);
+  }
+
+  @override
+  OwnTaskDao get ownTaskDao {
+    return _ownTaskDaoInstance ??= _$OwnTaskDao(database, changeListener);
   }
 }
 
@@ -234,5 +244,65 @@ class _$ChallangeNoteDao extends ChallangeNoteDao {
   Future<void> updateChallangeNote(ChallangeNote challangeNote) async {
     await _challangeNoteUpdateAdapter.update(
         challangeNote, OnConflictStrategy.abort);
+  }
+}
+
+class _$OwnTaskDao extends OwnTaskDao {
+  _$OwnTaskDao(this.database, this.changeListener)
+      : _queryAdapter = QueryAdapter(database),
+        _ownTaskInsertionAdapter = InsertionAdapter(
+            database,
+            'OwnTask',
+            (OwnTask item) => <String, Object?>{
+                  'id': item.id,
+                  'baslik': item.baslik,
+                  'aciklama': item.aciklama,
+                  'gunler': item.gunler
+                }),
+        _ownTaskUpdateAdapter = UpdateAdapter(
+            database,
+            'OwnTask',
+            ['id'],
+            (OwnTask item) => <String, Object?>{
+                  'id': item.id,
+                  'baslik': item.baslik,
+                  'aciklama': item.aciklama,
+                  'gunler': item.gunler
+                });
+
+  final sqflite.DatabaseExecutor database;
+
+  final StreamController<String> changeListener;
+
+  final QueryAdapter _queryAdapter;
+
+  final InsertionAdapter<OwnTask> _ownTaskInsertionAdapter;
+
+  final UpdateAdapter<OwnTask> _ownTaskUpdateAdapter;
+
+  @override
+  Future<List<OwnTask>> findAllOwnTask() async {
+    return _queryAdapter.queryList('SELECT * FROM OwnTask',
+        mapper: (Map<String, Object?> row) => OwnTask(
+            row['id'] as int?,
+            row['baslik'] as String,
+            row['aciklama'] as String,
+            row['gunler'] as String));
+  }
+
+  @override
+  Future<void> delete(int id) async {
+    await _queryAdapter
+        .queryNoReturn('DELETE FROM OwnTask WHERE id = ?1', arguments: [id]);
+  }
+
+  @override
+  Future<void> insertOwnTask(OwnTask ownTask) async {
+    await _ownTaskInsertionAdapter.insert(ownTask, OnConflictStrategy.abort);
+  }
+
+  @override
+  Future<void> updateOwnTask(OwnTask ownTask) async {
+    await _ownTaskUpdateAdapter.update(ownTask, OnConflictStrategy.abort);
   }
 }
