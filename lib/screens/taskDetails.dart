@@ -109,7 +109,7 @@ class _TaskDetailsState extends State<TaskDetails> {
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             Challanges.challangeList[widget.challangeIndex]
-                                .days[widget.dayIndex],
+                                .days[widget.dayIndex-1],
                             style: TextStyle(
                               fontSize: 16,
                             ),

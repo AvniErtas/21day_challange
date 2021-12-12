@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_21/documents/challanges.dart';
+import 'package:flutter_app_21/entity/ownTask.dart';
 import 'package:flutter_app_21/model/Challange.dart';
-
+import 'dart:convert';
 import '../../main.dart';
 import 'course_info_screen.dart';
 import 'design_course_app_theme.dart';
 import 'models/category.dart';
+import 'package:flutter_app_21/database/database.dart';
 
 class PopularCourseListView extends StatefulWidget {
   const PopularCourseListView({Key? key}) : super(key: key);
@@ -17,36 +19,49 @@ class PopularCourseListView extends StatefulWidget {
 class _PopularCourseListViewState extends State<PopularCourseListView>
     with TickerProviderStateMixin {
   AnimationController? animationController;
+  late Future<List<Challange>> _getData;
+
   @override
   void initState() {
     animationController = AnimationController(
         duration: const Duration(milliseconds: 2000), vsync: this);
+    _getData = getData();
     super.initState();
   }
 
-  Future<bool> getData() async {
-    await Future<dynamic>.delayed(const Duration(milliseconds: 200));
-    return true;
+  Future<List<Challange>> getData() async {
+    var database = await $FloorAppDatabase.databaseBuilder('app_database.db').build();
+    final ownTaskDao = database.ownTaskDao;
+    var taskList = await ownTaskDao.findAllOwnTask();
+    // OwnTask olusturulanTask = OwnTask(1, "baslik", "aciklama", "gunler");
+    var challangeList = Challanges.challangeList;
+    taskList.forEach((element) {
+      List<String> gunler = List<String>.from(json.decode(element.gunler));
+      var newChallange =  Challange(challangesName: element.baslik,description: element.aciklama,imagePath: "assets/design_course/verimlilik.jpg",days: gunler);
+      challangeList.add(newChallange);
+    });
+    print(challangeList.length.toString());
+    return challangeList;
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 8),
-      child: FutureBuilder<bool>(
-        future: getData(),
-        builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+      child: FutureBuilder<List<Challange>>(
+        future: _getData,
+        builder: (BuildContext context, AsyncSnapshot<List<Challange>> snapshot) {
           if (!snapshot.hasData) {
-            return const SizedBox();
+            return const CircularProgressIndicator();
           } else {
             return GridView(
               padding: const EdgeInsets.all(4),
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.vertical,
               children: List<Widget>.generate(
-                Challanges.challangeList.length,
+                snapshot.data!.length,
                 (int index) {
-                  final int count = Challanges.challangeList.length;
+                  final int count = snapshot.data!.length;
                   final Animation<double> animation =
                       Tween<double>(begin: 0.0, end: 1.0).animate(
                     CurvedAnimation(
@@ -58,7 +73,7 @@ class _PopularCourseListViewState extends State<PopularCourseListView>
                   animationController?.forward();
                   return CategoryView(
                     index: index,
-                    challange: Challanges.challangeList[index],
+                    challange: snapshot.data![index],
                     animation: animation,
                     animationController: animationController,
                   );

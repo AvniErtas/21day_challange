@@ -20,7 +20,7 @@ class ProfilePage extends StatelessWidget {
           ),
           Container(
             child: Image.asset(
-              "assets/design_course/userImage.png",
+              "assets/design_course/profil_man.png",
               fit: BoxFit.cover,
             ),
             height: 100,
@@ -71,7 +71,7 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Text("\n0 Beğeni",style: TextStyle(fontSize: 16,),),
+                  // Text("\n0 Beğeni",style: TextStyle(fontSize: 16,),),
                 ],
               ),
               Column(

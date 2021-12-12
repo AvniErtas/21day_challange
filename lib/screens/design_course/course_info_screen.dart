@@ -118,7 +118,8 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                     padding: const EdgeInsets.only(
                                         top: 32.0, left: 18, right: 16),
                                     child: Text(
-                                      'Gece Rutini',
+                                        Challanges
+                                            .challangeList[widget.index].challangesName,
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
                                         fontWeight: FontWeight.w600,
@@ -202,7 +203,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                   ],
                 ),
                 floatingActionButton: ExpandableFab(
-                  distance: 112.0,
+                  distance: 100.0,
                   children: [
                     FloatingActionButton.extended(
                       onPressed: () => _yenidenBaslat(),

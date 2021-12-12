@@ -5,6 +5,7 @@ import 'package:flutter_app_21/entity/ownTask.dart';
 import 'package:flutter_app_21/tools/custom_dialog_box.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 import 'dart:convert';
+import 'package:flutter/services.dart';
 
 class CreateOwnTask extends StatefulWidget {
   const CreateOwnTask({Key? key}) : super(key: key);
@@ -15,8 +16,9 @@ class CreateOwnTask extends StatefulWidget {
 
 class _CreateOwnTaskState extends State<CreateOwnTask> {
   late TutorialCoachMark tutorialCoachMark;
+  final focus = FocusNode();
   List<TargetFocus> targets = <TargetFocus>[];
-  List tasks = [];
+
   List<TextEditingController> _gunController =
       List.generate(21, (i) => TextEditingController());
 
@@ -38,12 +40,12 @@ class _CreateOwnTaskState extends State<CreateOwnTask> {
         context: context,
         builder: (BuildContext context) {
           return CustomDialogBox(
-            title: "Custom Dialog Demo",
+            title: "Yardım menüsünü görmek istiyor musunuz?",
             descriptions:
-                "Hii all this is a custom dialog in flutter and  you will be use in your flutter applications",
-            text: "No",
-            text2: "Yes",
-            img: "assets/design_course/userImage.png",
+                "",
+            text: "Hayır",
+            text2: "Evet",
+            img: "assets/design_course/profil_man.png",
             voidCallback: () => {
               Future.delayed(Duration.zero, showTutorial),
               Navigator.of(context).pop(),
@@ -113,6 +115,9 @@ class _CreateOwnTaskState extends State<CreateOwnTask> {
   }
 
   Widget buildTaskName(index) => TextFormField(
+    inputFormatters: [
+      LengthLimitingTextInputFormatter(26),
+    ],
         key: keyButton,
         decoration: InputDecoration(
           labelText: 'Meydan Okuma Başlığı',
@@ -122,7 +127,8 @@ class _CreateOwnTaskState extends State<CreateOwnTask> {
         validator: (value) {
           if (value!.length < 2) {
             return 'Lütfen 2 karakterden uzun bir başlık giriniz';
-          } else {
+          }
+          else {
             return null;
           }
         },
@@ -150,6 +156,7 @@ class _CreateOwnTaskState extends State<CreateOwnTask> {
           Icon(Icons.calendar_today),
           Expanded(
             child: TextFormField(
+              textInputAction: TextInputAction.next,
               maxLines: 1,
               controller: _gunController[index],
               decoration: InputDecoration(
@@ -163,7 +170,8 @@ class _CreateOwnTaskState extends State<CreateOwnTask> {
                   return null;
                 }
               },
-              onChanged: (value) => setState(() => tasks[index] = value),
+              onEditingComplete : () => FocusScope.of(context).nextFocus(),
+              // onChanged: (value) => setState(() => tasks[index] = value),
             ),
           ),
         ],

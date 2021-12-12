@@ -1,4 +1,4 @@
-import 'package:animated_drawer/views/animated_drawer.dart';
+//import 'package:animated_drawer/views/animated_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app_21/screens/bottom_bar_view.dart';
@@ -11,12 +11,11 @@ import 'fitness_app_theme.dart';
 import 'screens/design_course/home_design_course.dart';
 import 'tools/sharedPreferencesHelper.dart';
 
-
 /// Yan menüde profil,iletişim,gizlilik politikası kalsın
 /// Eksik içerikleri tamamla (resim ve yazı)
 /// Kendi meydan okuma sayfası içinde yeni kategori oluşturma
 
-Future<void> main() async{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPreferencesHelper.init();
   runApp(MainApp());
@@ -27,7 +26,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: //WelcomePage(),
-       Home(),
+          Home(),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -62,7 +61,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedDrawer(
+    /* return AnimatedDrawer(
       homePageXValue: 150,
       homePageYValue: 80,
       homePageAngle: -0.2,
@@ -91,11 +90,13 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.asset(
-                  "assets/design_course/userImage.png",
+                  "assets/design_course/profil_man.png",
                   fit: BoxFit.cover,
+                  height: 100,
+                  width: 100,
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Row(
                   children: [
@@ -152,7 +153,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     ),
                   ],
                 ),
-                /*   Padding(
+                */ /*   Padding(
                   padding: EdgeInsets.only(bottom: 20),
                 ),
                Row(
@@ -166,7 +167,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       ),
                     ),
                   ],
-                ),*/
+                ),*/ /*
                 Padding(
                   padding: EdgeInsets.only(bottom: 20),
                 ),
@@ -224,7 +225,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                     ),
                   ],
                 ),
-                /*Padding(
+                */ /*Padding(
                   padding: EdgeInsets.only(bottom: 20),
                 ),
                 Row(
@@ -238,7 +239,7 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
                       ),
                     ),
                   ],
-                ),*/
+                ),*/ /*
 
               ],
             ),
@@ -260,6 +261,27 @@ class _HomeState extends State<Home> with TickerProviderStateMixin {
         bottomBar(),
       ],
       ),
+    );*/
+
+    return Scaffold(
+      body: Stack(children: [
+        DesignCourseHomeScreen(),
+        Padding(
+          padding: EdgeInsets.only(
+              top: MediaQuery.of(context).size.height * 0.07, right: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Icon(
+                Icons.attach_money,
+                color: Colors.green,
+              ),
+              Text(coin.toString())
+            ],
+          ),
+        ),
+        bottomBar(),
+      ]),
     );
   }
 
