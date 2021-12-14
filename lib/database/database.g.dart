@@ -86,7 +86,7 @@ class _$AppDatabase extends AppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `UserProgress` (`id` INTEGER NOT NULL, `lastDay` INTEGER NOT NULL, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `UserProgress` (`id` INTEGER NOT NULL, `lastDay` INTEGER NOT NULL, `dateTime` TEXT NOT NULL, PRIMARY KEY (`id`))');
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `ChallangeNote` (`id` INTEGER NOT NULL, `dayId` INTEGER NOT NULL, `note` TEXT NOT NULL, PRIMARY KEY (`id`))');
         await database.execute(
@@ -122,15 +122,21 @@ class _$UserProgressDao extends UserProgressDao {
         _userProgressInsertionAdapter = InsertionAdapter(
             database,
             'UserProgress',
-            (UserProgress item) =>
-                <String, Object?>{'id': item.id, 'lastDay': item.lastDay},
+            (UserProgress item) => <String, Object?>{
+                  'id': item.id,
+                  'lastDay': item.lastDay,
+                  'dateTime': item.dateTime
+                },
             changeListener),
         _userProgressUpdateAdapter = UpdateAdapter(
             database,
             'UserProgress',
             ['id'],
-            (UserProgress item) =>
-                <String, Object?>{'id': item.id, 'lastDay': item.lastDay},
+            (UserProgress item) => <String, Object?>{
+                  'id': item.id,
+                  'lastDay': item.lastDay,
+                  'dateTime': item.dateTime
+                },
             changeListener);
 
   final sqflite.DatabaseExecutor database;
@@ -146,15 +152,15 @@ class _$UserProgressDao extends UserProgressDao {
   @override
   Future<List<UserProgress>> findAllUserProgress() async {
     return _queryAdapter.queryList('SELECT * FROM UserProgress',
-        mapper: (Map<String, Object?> row) =>
-            UserProgress(row['id'] as int, row['lastDay'] as int));
+        mapper: (Map<String, Object?> row) => UserProgress(row['id'] as int,
+            row['lastDay'] as int, row['dateTime'] as String));
   }
 
   @override
   Stream<UserProgress?> findUserProgressById(int id) {
     return _queryAdapter.queryStream('SELECT * FROM UserProgress WHERE id = ?1',
-        mapper: (Map<String, Object?> row) =>
-            UserProgress(row['id'] as int, row['lastDay'] as int),
+        mapper: (Map<String, Object?> row) => UserProgress(
+            row['id'] as int, row['lastDay'] as int, row['dateTime'] as String),
         arguments: [id],
         queryableName: 'UserProgress',
         isView: false);

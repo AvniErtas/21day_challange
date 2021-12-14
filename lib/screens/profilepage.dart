@@ -1,8 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:animator/animator.dart';
+import 'package:flutter_app_21/database/database.dart';
+import 'package:flutter_app_21/entity/UserProgress.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  int meydanOkumaSayisi = 0;
+  int tamamlananMeydanOkuma = 0;
+  var tamamlananGorevToplami = 0;
+  void getProgressFromDB() async{
+    var database =
+    await $FloorAppDatabase.databaseBuilder('app_database.db').build();
+
+    final userProgressDao = database.userProgressDao;
+    final result = await userProgressDao.findAllUserProgress();
+    var toplam = 0;
+    result.forEach((element) {
+      int yuzde = tamamlanmaYuzdesiHesapla(element.lastDay, 21);
+      if(yuzde == 100)
+        tamamlananGorevToplami++;
+    });
+
+    setState(() {
+      meydanOkumaSayisi = result.length;
+      tamamlananGorevToplami = toplam;
+
+    });
+  }
+
+  @override
+  void initState() {
+    getProgressFromDB();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +89,7 @@ class ProfilePage extends StatelessWidget {
               Column(
                 children: [
                   Icon(Icons.run_circle_outlined,size: 50,color: Colors.green,),
-                  Text("23 Güncel\nMeydan Okuma",style: TextStyle(fontSize: 16,),),
+                  Text("${meydanOkumaSayisi} Güncel\nMeydan Okuma",style: TextStyle(fontSize: 16,),),
                 ],
               ),
               Column(
@@ -77,13 +113,13 @@ class ProfilePage extends StatelessWidget {
               Column(
                 children: [
                   Icon(Icons.check,size: 50,color: Colors.green,),
-                  Text("Tamamlanan \nMeydan Okumalar",style: TextStyle(fontSize: 16,),),
+                  Text("${tamamlananGorevToplami} Tamamlanan \nMeydan Okumalar",style: TextStyle(fontSize: 16,),),
                 ],
               ),
             ],
           ),
           SizedBox(height: 20,),
-          ElevatedButton(
+         /* ElevatedButton(
             child: Text(
               "Görevleri Göster",
               style: TextStyle(color: Colors.white),
@@ -91,9 +127,13 @@ class ProfilePage extends StatelessWidget {
             onPressed: () {
               debugPrint("Butona tıklandı");
             },
-          ),
+          ),*/
         ],
       ),
     );
+  }
+
+  int tamamlanmaYuzdesiHesapla(int lastDay,int totalDay) {
+    return lastDay*100~/totalDay;
   }
 }

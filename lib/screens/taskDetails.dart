@@ -37,6 +37,8 @@ class _TaskDetailsState extends State<TaskDetails> {
   var coin;
   var isFinish = true;
   var isFinishAd = true;
+  var time = DateTime.now();
+  var time2 = DateTime.utc(2021,12,12);
   final scratchKey = GlobalKey<ScratcherState>();
   @override
   Widget build(BuildContext context) {
@@ -192,7 +194,7 @@ class _TaskDetailsState extends State<TaskDetails> {
                     color: Colors.deepOrangeAccent,
                   ),
                 ),
-                Visibility(
+               /* Visibility(
                   visible: isFinishAd,
                   child: RaisedButton(
                     child: Row(
@@ -219,13 +221,19 @@ class _TaskDetailsState extends State<TaskDetails> {
                     },
                     color: Colors.deepOrangeAccent,
                   ),
-                ),
+                ),*/
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  int daysBetween(DateTime from, DateTime to) {
+    from = DateTime(from.year, from.month, from.day);
+    to = DateTime(to.year, to.month, to.day);
+    return (to.difference(from).inHours / 24).round();
   }
 
   void _saveToDb(int coin) async {
@@ -235,7 +243,7 @@ class _TaskDetailsState extends State<TaskDetails> {
     final userProgressDao = database.userProgressDao;
     final result = userProgressDao.findUserProgressById(widget.challangeIndex);
     if (await result.first == null) {
-      final progress = UserProgress(widget.challangeIndex, widget.dayIndex + 1);
+      final progress = UserProgress(widget.challangeIndex, widget.dayIndex + 1,DateTime.now().toString());
       await userProgressDao.insertUserProgress(progress);
 
       _coinSave(coin);

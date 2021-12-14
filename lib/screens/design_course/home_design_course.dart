@@ -274,7 +274,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
             children: <Widget>[
 
               Text(
-                'İyi Geceler',
+                DateTime.now().hour > 20 ? 'İyi Geceler' : 'İyi Günler',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   fontWeight: FontWeight.w400,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_21/database/database.dart';
 import 'package:flutter_app_21/documents/challanges.dart';
+import 'package:flutter_app_21/entity/UserProgress.dart';
 import 'package:flutter_app_21/screens/taskDetails.dart';
 import 'package:flutter_app_21/tools/expandableFab.dart';
 import 'design_course_app_theme.dart';
@@ -22,6 +23,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
   double opacity1 = 1.0;
   double opacity2 = 1.0;
   double opacity3 = 1.0;
+  void _getDB;
   @override
   void initState() {
     animationController = AnimationController(
@@ -61,7 +63,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
         24.0;
     return FutureBuilder(
       future: getLastDayFromDb(),
-      builder: (BuildContext context, AsyncSnapshot<int> snapshot) {  // AsyncSnapshot<Your object type>
+      builder: (BuildContext context, AsyncSnapshot<UserProgress> snapshot) {  // AsyncSnapshot<Your object type>
         if( snapshot.connectionState == ConnectionState.waiting){
           return  CircularProgressIndicator();
         }else{
@@ -161,8 +163,9 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                           Animation<double> animation = createBoxAnimation(index);
 
                                           return getTimeBoxUI(
+                                            snapshot.data!.dateTime,
                                               index,
-                                              snapshot.data!,
+                                              snapshot.data!.lastDay,
                                               animationController!,
                                               animation);
                                         },
@@ -255,13 +258,20 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
     return animation;
   }
 
-  Widget getTimeBoxUI(int index,int lastDay,
+  Widget getTimeBoxUI(String time,int index,int lastDay,
       AnimationController? animationController, Animation<double> animation) {
     return InkWell(
       onTap: () {
-        if((index+1) <= lastDay)
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => TaskDetails(index+1,widget.index,lastDay)));
+        if((index+1) <= lastDay) {
+          if(daysBetween(DateTime.parse(time), DateTime.now())>0) {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) =>
+                    TaskDetails(index + 1, widget.index, lastDay)));
+          }else {
+            final snackBar = SnackBar(content: Text('Bu günü sonraki gün yapabilirsiniz.'),backgroundColor: Colors.red,);
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          }
+        }
         else {
           final snackBar = SnackBar(content: Text('Bu günü açmak için diğerlerini tamamlamalısınız.'),backgroundColor: Colors.red,);
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -329,14 +339,20 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
     );
   }
 
-  Future<int> getLastDayFromDb() async {
+  Future<UserProgress> getLastDayFromDb() async {
     var database = await $FloorAppDatabase.databaseBuilder('app_database.db').build();
     final userProgressDao = database.userProgressDao;
     final result = userProgressDao.findUserProgressById(widget.index);
     var lastDay = 1;
+    var dateTime = DateTime.utc(1970).toString();
     if(await result.first!=null)
-    await result.first.then((value) => lastDay = value!.lastDay);
-    return lastDay;
+    await result.first.then((value) {
+      lastDay = value!.lastDay;
+      dateTime = value.dateTime;
+    });
+
+    var userProgress = UserProgress(0, lastDay, dateTime);
+    return userProgress;
   }
 
   void _yenidenBaslat() async {
@@ -371,5 +387,11 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
       backgroundColor: Colors.red,
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  int daysBetween(DateTime from, DateTime to) {
+    from = DateTime(from.year, from.month, from.day);
+    to = DateTime(to.year, to.month, to.day);
+    return (to.difference(from).inHours / 24).round();
   }
 }
