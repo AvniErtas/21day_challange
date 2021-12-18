@@ -70,7 +70,7 @@ class _ProfilePageState extends State<ProfilePage> {
             children: [
               Icon(Icons.male,size: 30,),
               Text(
-                "Avel",
+                "MÜCADELECİ",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               Icon(

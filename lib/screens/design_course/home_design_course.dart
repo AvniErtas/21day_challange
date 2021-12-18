@@ -44,7 +44,7 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Center(
                           child: Text(
-                        "When one door of happiness closes, another opens; but often we look so long at the closed door that we do not see the one which has been opened for us",
+                        "Bir mutluluk kapısı kapandığında diğeri açılır; ama çoğu zaman kapalı kapıya o kadar uzun süre bakarız ki bizim için açılan kapıyı görmeyiz.",
                         style: TextStyle(fontSize: 12),
                         textAlign: TextAlign.center,
                       )),
@@ -284,11 +284,11 @@ class _DesignCourseHomeScreenState extends State<DesignCourseHomeScreen> {
                 ),
               ),
               Text(
-                'AVEL',
+                'Mücadeleci',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 22,
+                  fontSize: 18,
                   letterSpacing: 0.27,
                   color: DesignCourseAppTheme.darkerText,
                 ),
