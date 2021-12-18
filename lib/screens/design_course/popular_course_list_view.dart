@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_21/documents/challanges.dart';
 import 'package:flutter_app_21/entity/ownTask.dart';
@@ -140,9 +141,10 @@ class CategoryView extends StatelessWidget {
                                   child: Container(
                                     child: Column(
                                       children: <Widget>[
-                                        Text(
+                                        AutoSizeText(
                                           challange.challangesName,
                                           textAlign: TextAlign.left,
+                                          maxLines: 1,
                                           style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 16,
