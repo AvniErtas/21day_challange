@@ -216,7 +216,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                         style: TextStyle(fontSize: 13),
                       ),
                     ),
-                    FloatingActionButton.extended(
+                   /* FloatingActionButton.extended(
                       onPressed: () => _showAction(context, 1),
                       icon: const Icon(Icons.notification_important),
                       label: Text(
@@ -231,7 +231,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                         "Gizle",
                         style: TextStyle(fontSize: 13),
                       ),
-                    ),
+                    ),*/
                   ],
                 ),
               ),
