@@ -262,8 +262,9 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
       AnimationController? animationController, Animation<double> animation) {
     return InkWell(
       onTap: () {
+        print('Girdim ${index+1}---$lastDay');
         if((index+1) <= lastDay) {
-          if(daysBetween(DateTime.parse(time), DateTime.now())>0) {
+          if((index+1) < lastDay || daysBetween(DateTime.parse(time), DateTime.now())>0) {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) =>
                     TaskDetails(index + 1, widget.index, lastDay)));
